@@ -1,0 +1,56 @@
+<html>
+<head> 
+<link id="themeStylesheetLink", rel="stylesheet" href="../design/css/themes/metal.css">
+<link rel="stylesheet" href="../design/css/default.css">
+<title>Ibaraki's page</title>
+</head>
+<body>
+	<div id="wrapper">
+		<div id="top">
+		<h1 class="large noMargin floatLeft paddingLeft">Yoo, welcome!</h1>
+			<div id="topButtons", class="floatRight">
+			<a href="projects.html"><button>Games</button></a>
+			<button disabled>Achievements</button>
+			<a href="options.html"><button>Options</button></a>
+			<button disabled>Links & About</button>
+			</div>
+		</div>
+		<div id="main">
+		<p>Choose a theme:</p><br>
+		<select id="themeSelect">
+			<option value="metal">Metal</option>
+			<option value="light">Flash Bomb</option>
+			<option value="dark">The Abyss stares back</option>
+			<option value="matrix">Wake up, Neo</option>
+			<option value="bee">B e e</option>
+			<option value="angry">For the Blood God</option>
+			<option value="bsod">B.S.O.D.</option>
+			<option value="magik">Magik</option>
+		</select><br>
+		<script>
+		function initThemeSelector(){
+			const themeSelect = document.getElementById("themeSelect");
+			const themeStylesheetLink = document.getElementById("themeStylesheetLink");
+			const currentTheme = localStorage.getItem("theme") || "metal";
+		
+		function activateTheme(metal){
+			themeStylesheetLink.setAttribute("href", `../design/css/themes/${metal}.css`);
+		}
+		
+		themeSelect.addEventListener("change", ()=>{
+			activateTheme(themeSelect.value);
+			localStorage.setItem("theme", themeSelect.value);
+		});
+		
+		themeSelect.value = currentTheme;
+		activateTheme(currentTheme);
+		}
+		initThemeSelector();
+		</script>
+		</div>
+		<div id="footer">
+		Made by Ibaraki DX
+		</div>
+	</div>
+</body>
+</html>

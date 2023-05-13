@@ -1,0 +1,66 @@
+<head> 
+<link id="themeStylesheetLink", rel="stylesheet" href="../design/css/themes/metal.css">
+<link rel="stylesheet" href="../design/css/default.css">
+<title>Ibaraki's page</title>
+</head>
+<body>
+<div id="wrapper">
+		<div id="top">
+		<h1 class="large noMargin floatLeft paddingLeft">Yoo, welcome!</h1>
+			<div id="topButtons", class="floatRight">
+				<a href="projects.html"><button>Games</button></a>
+				<button disabled>Achievements</button>
+				<a href="options.html"><button>Options</button></a>
+				<button disabled>Links & About</button>
+			</div>
+		</div>
+		<div id="main">
+		<div id="ascensionSection" class="tabcontent">
+
+</div>
+<div id="idleTab" class="tabcontent">
+	<button id="close" class="long large" onclick="this.parentElement.style.display='none'">Close</button>
+	<div id="idleStats">		
+	</div>
+</div>
+<div id="basicSection" class="tabcontent">
+	<button id="close" class="large" onclick="this.parentElement.style.display='none'">Close</button>
+	<button id="moreClick", onclick="buyMoreClick()", title="Increases base click by 1", disabled>More Clicks - lv. 0<br>10 points</button>
+	<button id="pointGen1", onclick="buyGen1()", title="Increases base generator power by 1", disabled>Point Generator - lv. 0<br>10 points</button>
+	<button id="betterClick", onclick="buyBetterClick()", title="Increases click power by 25%", disabled>Better Clicks - lvl. 0<br>250 points</button>
+	<button id="strongGen1", onclick="buyStrongGen1()", title="Increases generator production by 25%", disabled>Stronger Generator - lvl. 0<br>250 points</button>
+	<button id="percentClick", onclick="buyPercentClick()", title="Increases click power by 0.75% of the points per second", disabled>Synergy - lvl. 0<br>100 points</button>
+</div>
+<div class="tab floatRight" id="idleUpgradeSections">
+<button class="tablink large" onclick="openIdleTab(event, 'basicSection')">Upgrades</button>
+<button id="ascensionButton" class="tablink large" onclick="openIdleTab(event, 'ascensionSection')" style="display:none" disabled>Ascend</button>
+<button class="tablink large" onclick="openIdleTab(event, 'idleTab')">Stats</button>
+</div>
+<div style="padding-left:5px">
+<p id="pointCounter", class="large">You have 0 points</p> <br><br>
+<p id="ppsCounter"></p><br>
+<p id="clickPower">You have 1 click power</p><br><br>
+<button onclick="clickPoints()", class="large">Get Points!</button> <br><br>
+<p id="highscoreDisplay", class="floatLeft noMargin">You don't have a highscore :c</p>
+</div>
+
+<script src="../code/idle.js" type="text/javascript"></script>
+		</div>
+		<div id="footer">
+		Made by Ibaraki DX
+		</div>
+	</div>
+
+
+<script>function initThemeSelector(){
+	const themeStylesheetLink = document.getElementById("themeStylesheetLink");
+	const currentTheme = localStorage.getItem("theme") || "metal";
+		
+	function activateTheme(metal){
+		themeStylesheetLink.setAttribute("href", `../design/css/themes/${metal}.css`);
+	}
+		
+	activateTheme(currentTheme);
+}
+initThemeSelector();</script>
+</body>

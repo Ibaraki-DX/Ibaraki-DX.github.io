@@ -1,0 +1,37 @@
+<head> 
+<link id="themeStylesheetLink", rel="stylesheet" href="../design/css/themes/metal.css">
+<link rel="stylesheet" href="../design/css/default.css">
+<title>Ibaraki's page</title>
+</head>
+<body>
+	<div id="wrapper">
+		<div id="top">
+		<h1 class="large noMargin floatLeft paddingLeft">Yoo, welcome!</h1>
+			<div id="topButtons", class="floatRight">
+				<a href="projects.html"><button>Games</button></a>
+				<button disabled>Achievements</button>
+				<a href="options.html"><button>Options</button></a>
+				<button disabled>Links & About</button>
+			</div>
+		</div>
+		<div id="main" class="floatLeft paddingLeft">
+		<h1 class="noMargin">My projects for now</h1><br>
+		<p>An unnamed idle game (also unfinished) - </p> <a href="idle.html"><button>play</button></a>
+		
+<script>function initThemeSelector(){
+	const themeStylesheetLink = document.getElementById("themeStylesheetLink");
+	const currentTheme = localStorage.getItem("theme") || "metal";
+		
+	function activateTheme(metal){
+		themeStylesheetLink.setAttribute("href", `../design/css/themes/${metal}.css`);
+	}
+		
+	activateTheme(currentTheme);
+}
+initThemeSelector();</script>
+		</div>
+		<div id="footer">
+		Made by Ibaraki DX
+		</div>
+	</div>
+</body>
