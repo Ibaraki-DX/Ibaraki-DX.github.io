@@ -12,10 +12,10 @@
 			<a href="projects.html"><button>Games</button></a>
 			<button disabled>Achievements</button>
 			<a href="options.html"><button>Options</button></a>
-			<button disabled>Links & About</button>
+			<a href="others.html"><button>Others</button></a>
 			</div>
 		</div>
-		<div id="main">
+		<div id="main" style="padding:5px">
 		<p>Choose a theme:</p><br>
 		<select id="themeSelect">
 			<option value="metal">Metal</option>
@@ -27,6 +27,12 @@
 			<option value="bsod">B.S.O.D.</option>
 			<option value="magik">Magik</option>
 		</select><br>
+		<p>Choose a number type</p><br>
+		<select id="numTypeSelect">
+			<option value="long">Long</option>
+			<option value="scientific">Scientific</option>
+			<option value="engineering">Engineering</option>
+		</select>
 		<script>
 		function initThemeSelector(){
 			const themeSelect = document.getElementById("themeSelect");
@@ -46,6 +52,17 @@
 		activateTheme(currentTheme);
 		}
 		initThemeSelector();
+		
+		function initNumType(){
+			const numTypeSelect = document.getElementById("numTypeSelect");
+			const currentNumType = localStorage.getItem("numType") || "long";
+			
+			numTypeSelect.addEventListener("change", ()=>{
+				localStorage.setItem("numType",numTypeSelect.value);
+			});
+			numTypeSelect.value = currentNumType;
+		}
+		initNumType();
 		</script>
 		</div>
 		<div id="footer">

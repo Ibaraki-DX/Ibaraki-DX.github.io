@@ -129,3 +129,11 @@ p{
 	color:var(--font);
 	margin:0;
 }
+
+#offlineIdle{
+	background:var(--lighterBack);
+	flex-grow:1;
+	border-bottom: 3px solid var(--detail);
+	overflow-y:auto;
+	color:var(--font);
+}
