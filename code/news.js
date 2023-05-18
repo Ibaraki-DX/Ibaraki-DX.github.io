@@ -19,6 +19,7 @@ newsArray = [
 ["xd - the dev, anytime he sends a message",true],
 ["No, don't put a cat on a box with radioactive stuff and explosives",true],
 ["News ticker 1, looking at the big numbers 1123581321345589144233377610987",true],
+["Hey, you can hover over the upgrades", true],
 //news
 ["Breaking news: The entity known as \"You\" just turned one more idleverse into a cookie production machine, our scientists are now scared of cookies", true],
 ["Breaking news: Idleverse made of antimatter somehow surpassed infinity, scientists worry it might overflow", true],
