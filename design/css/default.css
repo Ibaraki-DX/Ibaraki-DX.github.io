@@ -137,3 +137,17 @@ p{
 	overflow-y:auto;
 	color:var(--font);
 }
+#newsBox{
+	background:var(--lighterBack);
+	height:auto;
+	overflow-x:hidden;
+	border-bottom: 3px solid var(--detail);
+	color:var(--font);
+	white-space:nowrap;
+}
+#news{
+	color:var(--font);
+	display:inline-block;
+	overflow-x:hidden;
+	font-family: Courier-New, monospace;
+}

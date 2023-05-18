@@ -33,6 +33,11 @@
 			<option value="scientific">Scientific</option>
 			<option value="engineering">Engineering</option>
 		</select>
+		<br>
+		<p>Wipe the idle data</p>
+		<br>
+		<button class="floatleft" onclick="confirmWipeIdle()"><h1>W I P E</h1></button>
+		<div id="wipeIdleData" style="display:none"></div>
 		<script>
 		function initThemeSelector(){
 			const themeSelect = document.getElementById("themeSelect");
@@ -63,6 +68,66 @@
 			numTypeSelect.value = currentNumType;
 		}
 		initNumType();
+		
+		var confirmationText = "restart";
+		
+		function confirmWipeIdle(){
+			document.getElementById("wipeIdleData").style.display = "block";
+			var x = Math.floor(Math.random()*13)
+			if(x == 0) confirmationText = "Shrek is love, Shrek is life" 
+			if(x == 1) confirmationText = "I just want to restart man"
+			if(x == 2) confirmationText = "I hate big numbers >:("
+			if(x == 3) confirmationText = "Did you know that in terms of"
+			if(x == 4) confirmationText = "Do you have any creativity?"
+			if(x == 5) confirmationText = "Yeah that was a bad run, my bad"
+			if(x == 6) confirmationText = "I resign my idleverse to the cookie production"
+			if(x == 7) confirmationText = "Maybe we could put some antimatter on it"
+			if(x == 8) confirmationText = "I wanna click the big button :D"
+			if(x == 9) confirmationText = "Connection terminated"
+			if(x == 10) confirmationText = "Its still you"
+			if(x == 11) confirmationText = "Who is the good boy? It's you, text box!"
+			if(x == 12) confirmationText = "We're no strangers to love"
+			document.getElementById("wipeIdleData").innerHTML = "Are you sure?<br>Insert the code:<br>" + confirmationText + "<br><input id='textWipe' type='text'></input><button id='idleGone' onclick='idleGone()'>Delete</button>";
+		}
+		function idleGone(){
+			if(document.getElementById("textWipe").value == confirmationText){
+			var idleData ={
+	points: 0.0,
+	baseClick:0,
+	baseBonus:1.0,
+	percentClick:0,
+	gen1Power:0,
+	gen1Bonus:1.0,
+	highestScore:0,
+	betterClickAmt:0,
+	strongGen1:0,
+	lambdaDiscount:0,
+	betterClick:1.25,
+	betterGen:1.25,
+	logPower:false,
+	allTimePoints:0,
+	synergyBonus:0.01,
+	basicDiscount:0.9,
+	basicDiscountAmt:0,
+	idleKing:0,
+	idleKingBonus:0.0,
+	idleKingCap:0.5,
+	buyMax:false,
+	version:2,
+	thisAscension:Date.now(),
+	fastAscension:0,
+	numOfAscensions:0,
+	firstTimeAll:Date.now(),
+	lastTick:Date.now(),
+	lastClick:Date.now(),
+	sell:false,
+	sellBack:0.75
+}
+				localStorage.setItem("idleSave", JSON.stringify(idleData))
+			} else{
+			document.getElementById("wipeIdleData").innerHTML = "Damn, that was the wrong password..."
+			}
+		}
 		</script>
 		</div>
 		<div id="footer">
