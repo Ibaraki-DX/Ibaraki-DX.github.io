@@ -136,11 +136,11 @@ function buyMoreClick(){
 	if(!idleData.sell){	
 	idleData.points-=price(10, 1.5, idleData.baseClick,true);
 	idleData.baseClick++;
+	if(idleData.buyMax&&price(10, 1.5, idleData.baseClick,true)<idleData.points) buyMoreClick()
 	} else {
 	idleData.points+=price(10, 1.5, idleData.baseClick,true);
-	idleData.baseClick--;	
-	}
-	if(idleData.buyMax&&price(10, 1.5, idleData.baseClick,true)<idleData.points||idleData.buyMax&&idleData.baseClick>0&&idleData.sell) buyMoreClick()
+	idleData.baseClick--;
+	if(idleData.buyMax&&idleData.baseClick>0&&idleData.sell) buyMoreClick()}
 	if(idleData.baseClick>=10){
 		idleData.baseBonus= 2**Math.floor(idleData.baseClick/25+1);
 	} else idleData.baseBonus=1;
@@ -151,12 +151,12 @@ function buyGen1(){
 	if(!idleData.sell){	
 	idleData.points-=price(10, 1.2, idleData.gen1Power,true);
 	idleData.gen1Power++;	
+	if(idleData.buyMax&&price(10, 1.2, idleData.gen1Power,true)<idleData.points) buyGen1()
 	}
 	else {		
 	idleData.points+=price(10, 1.2, idleData.gen1Power,true);
-	idleData.gen1Power--;	
-	}
-	if(idleData.buyMax&&price(10, 1.2, idleData.gen1Power,true)<idleData.points||idleData.buyMax&&idleData.gen1Power>0&&idleData.sell) buyGen1()
+	idleData.gen1Power--;
+	if(idleData.buyMax&&idleData.gen1Power>0&&idleData.sell) buyGen1()}
 	if(idleData.gen1Power>=10){
 		idleData.gen1Bonus= 2**Math.floor(idleData.gen1Power/25+1);
 	} else idleData.gen1Bonus=1;
@@ -167,10 +167,11 @@ function buyBetterClick(){
 	if(!idleData.sell){	
 	idleData.points-=priceG(250, 2, idleData.betterClick, idleData.betterClickAmt,true);
 	idleData.betterClickAmt++;
+	if(idleData.buyMax&&priceG(250, 2, idleData.betterClick, idleData.betterClickAmt,true)<idleData.points) buyBetterClick()
 	} else {
 	idleData.points+=priceG(250, 2, idleData.betterClick, idleData.betterClickAmt,true);
-	idleData.betterClickAmt--;}
-	if(idleData.buyMax&&priceG(250, 2, idleData.betterClick, idleData.betterClickAmt,true)<idleData.points||idleData.buyMax&&idleData.betterClick>0&&idleData.sell) buyBetterClick()
+	idleData.betterClickAmt--;
+	if(idleData.buyMax&&idleData.betterClickAmt>0&&idleData.sell) buyBetterClick()}
 	visualUpdate();
 }
 
@@ -178,10 +179,11 @@ function buyStrongGen1(){
 	if(!idleData.sell){	
 	idleData.points-=priceG(250, 2, idleData.betterGen, idleData.strongGen1,true);
 	idleData.strongGen1++;
+	if(idleData.buyMax&&priceG(250, 2, idleData.betterGen, idleData.strongGen1,true)<idleData.points) buyStrongGen1()
 	} else {
 	idleData.points+=priceG(250, 2, idleData.betterGen, idleData.strongGen1,true);
-	idleData.strongGen1--;}
-	if(idleData.buyMax&&priceG(250, 2, idleData.betterGen, idleData.strongGen1,true)<idleData.points||idleData.buyMax&&idleData.betterGen>0&&idleData.sell) buyStrongGen1()
+	idleData.strongGen1--;
+	if(idleData.buyMax&&idleData.strongGen1>0&&idleData.sell) buyStrongGen1()}
 	visualUpdate();
 }
 
@@ -189,10 +191,11 @@ function buyPercentClick(){
 	if(!idleData.sell){	
 	idleData.points-=price(50, 10, idleData.percentClick,true);
 	idleData.percentClick++;
+	if(idleData.buyMax&&price(50, 10, idleData.percentClick,true)<idleData.points) buyPercentClick()
 	} else {
 	idleData.points+=price(50, 10, idleData.percentClick,true);
-	idleData.percentClick--;}
-	if(idleData.buyMax&&price(50, 10, idleData.percentClick,true)<idleData.points||idleData.buyMax&&idleData.percentClick>0&&idleData.sell) buyPercentClick()
+	idleData.percentClick--;
+	if(idleData.buyMax&&idleData.percentClick>0&&idleData.sell) buyPercentClick()}
 	visualUpdate();
 }
 
@@ -200,10 +203,11 @@ function buyBasicDiscount(){
 	if(!idleData.sell){	
 	idleData.points-=price(100, 2, idleData.basicDiscountAmt,false);
 	idleData.basicDiscountAmt++;
+	if(idleData.buyMax&&price(100, 2, idleData.basicDiscountAmt,false)<idleData.points) buyBasicDiscount()
 	} else {
 	idleData.points+=price(100, 2, idleData.basicDiscountAmt,false);
-	idleData.basicDiscountAmt--;}
-	if(idleData.buyMax&&price(100, 2, idleData.basicDiscountAmt,false)<idleData.points||idleData.buyMax&&idleData.basicDiscountAmt&&idleData.sell>0) buyBasicDiscount()
+	idleData.basicDiscountAmt--;
+	if(idleData.buyMax&&idleData.basicDiscountAmt>0&&idleData.sell) buyBasicDiscount()}
 	visualUpdate();
 }
 
@@ -211,10 +215,11 @@ function buyIdleKing(){
 	if(!idleData.sell){	
 	idleData.points-=price(1000, 100, idleData.idleKing, false);
 	idleData.idleKing++;
+	if(idleData.buyMax&&price(1000, 100, idleData.idleKing,false)<idleData.points) buyIdleKing()
 	} else {
 	idleData.points+=price(1000, 100, idleData.idleKing, false);
-	idleData.idleKing--;}
-	if(idleData.buyMax&&price(1000, 100, idleData.idleKing,false)<idleData.points||idleData.buyMax&&idleData.idleKing>0&&idleData.sell) buyIdleKing()
+	idleData.idleKing--;
+	if(idleData.buyMax&&idleData.idleKing>0&&idleData.sell) buyIdleKing()}
 	visualUpdate();
 }
 
