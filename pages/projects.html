@@ -4,33 +4,30 @@
 <title>Ibaraki's page</title>
 </head>
 <body>
-	<div id="wrapper">
-		<div id="top">
+<div id='hoverGrid' class='hoverGrid'></div>
+	<div id="wrapper" class="animated">
+		<div id="top" class="animated">
 		<h1 class="large noMargin floatLeft paddingLeft">Yoo, welcome!</h1>
-			<div id="topButtons", class="floatRight">
+			<div id="topButtons", class="floatRight animated">
 				<a href="projects.html"><button>Games</button></a>
-				<button disabled>Achievements</button>
+				<a href="trophies.html"><button>Achievements</button></a>
 				<a href="options.html"><button>Options</button></a>
 				<a href="others.html"><button>Others</button></a>
 			</div>
 		</div>
+<div class="container"><div id="matrixBackground" class='matrix'></div> <div id="lanterns" class='lights'></div></div>
 		<div id="main" class="floatLeft paddingLeft">
 		<h1 class="noMargin">My projects for now</h1><br>
 		<p>An unnamed idle game (also unfinished) - </p> <a href="idle.html"><button>play</button></a>
 		
-<script>function initThemeSelector(){
-	const themeStylesheetLink = document.getElementById("themeStylesheetLink");
-	const currentTheme = localStorage.getItem("theme") || "metal";
 		
-	function activateTheme(metal){
-		themeStylesheetLink.setAttribute("href", `../design/css/themes/${metal}.css`);
-	}
-		
-	activateTheme(currentTheme);
-}
-initThemeSelector();</script>
+<script src="../code/universal.js" type="text/javascript"></script>
+<script>
+initThemeSelector()
+</script>
+
 		</div>
-		<div id="footer">
+		<div id="footer" class="animated">
 		Made by Ibaraki DX
 		</div>
 	</div>

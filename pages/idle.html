@@ -4,26 +4,154 @@
 <title>Ibaraki's page</title>
 </head>
 <body>
-<div id="wrapper">
-		<div id="top">
+<div id='hoverGrid' class='hoverGrid'></div>
+<div id="wrapper" class="animated">
+		<div id="top" class="animated">
 		<h1 class="large noMargin floatLeft paddingLeft">Yoo, welcome!</h1>
-			<div id="topButtons", class="floatRight">
+			<div id="topButtons", class="floatRight animated">
 				<a href="projects.html"><button>Games</button></a>
-				<button disabled>Achievements</button>
+				<a href="trophies.html"><button>Achievements</button></a>
 				<a href="options.html"><button>Options</button></a>
 				<a href="others.html"><button>Others</button></a>
 			</div>
+			<div id="musicSection" class="floatRight animated"> 
+			<div id="jukebox"><button onClick="musicPlayer()" class="long">Start jukebox</button></div>
+			<div id="textJukebox"class="animated"> 
+			Change stuff on the settings
+			</div>
+			</div>
 		</div>		
-		<div id="newsBox">		
+		<div id="newsBox"class="animated">		
 		<div id="news"></div>
 		</div>
+<div class="container"><div id="matrixBackground" class='matrix'></div> <div id="lanterns" class='lights'></div></div>
 <div id="offlineIdle" style="display:none">
 	
 </div>
-<div id="main">
-<div id="ascensionSection" class="tabcontent">
+<div id="ascensionSection" style='display:none;' class='select'>
+<h2 class='paddingleft'>You have ascended</h2>
+<h3 id="ascensionCounter" class='paddingleft'></h3>
 
+
+<div id="upgradeGrid" class="grid" style='padding:5px;grid-template-columns: repeat(4, minmax(0, 1fr));'>
+	<div>
+		<div id='logPowerTitle' class="head hasHover" onmouseover="ascensionMsg('logPower')" onclick="buyAscensionUpgrade('logPower')">
+			Log power<br>10 cooler points
+		</div>
+		<div class="cell hoverText" id="logPower">
+			Currently: <div id='logPowerCurrent'></div><br>
+			Upgrade: <div id='logPowerUpgrade'></div>
+		</div>
+		<div class="cell" style="background:grey;padding:0" id="logPowerPB1"><div class='progressBar' id='logPowerPB2'></div></div>
+	</div>
+	<div>
+		<div id='extraSynergyTitle' class="head hasHover" onmouseover="ascensionMsg('extraSynergy')" onclick="buyAscensionUpgrade('extraSynergy')">
+			Extra synergy<br>5 cooler points
+		</div>
+		<div class="cell hoverText" id="extraSynergy">
+			Currently: <div id='extraSynergyCurrent'></div><br>
+			Upgrade: <div id='extraSynergyUpgrade'></div>
+		</div>
+		<div class="cell" style="background:grey;padding:0" id="extraSynergyPB1"><div class='progressBar' id='extraSynergyPB2'></div></div>
+	</div>
+	<div></div>
+	<div></div>
+	<div>
+		<div id='starterPackTitle' class="head hasHover" onmouseover="ascensionMsg('starterPack')" onclick="buyAscensionUpgrade('starterPack')">
+			Starter pack<br>5 cooler points
+		</div>
+		<div class="cell hoverText" id="starterPack">
+			Currently: <div id='starterPackCurrent'></div><br>
+			Upgrade: <div id='starterPackUpgrade'></div>
+		</div>
+		<div class="cell" style="background:grey;padding:0" id="starterPackPB1"><div class='progressBar' id='starterPackPB2'></div></div>
+	</div>
+	<div>
+		<div id='comboPackTitle' class="head hasHover" onmouseover="ascensionMsg('comboPack')" onclick="buyAscensionUpgrade('comboPack')">
+			Combo pack<br>20 cooler points
+		</div>
+		<div class="cell hoverText" id="comboPack">
+			Currently: <div id='comboPackCurrent'></div><br>
+			Upgrade: <div id='comboPackUpgrade'></div>
+		</div>
+		<div class="cell" style="background:grey;padding:0" id="comboPackPB1"><div class='progressBar' id='comboPackPB2'></div></div>
+	</div>
+	<div></div>
+	<div></div>
+	<div>
+		<div id='memoryTitle' class="head hasHover" onmouseover="ascensionMsg('memory')" onclick="buyAscensionUpgrade('memory')">
+			Residual memory<br>100 cooler points
+		</div>
+		<div class="cell hoverText" id="memory">
+			Currently: <div id='memoryCurrent'></div><br>
+			Upgrade: <div id='memoryUpgrade'></div>
+		</div>
+		<div class="cell" style="background:grey;padding:0" id="memoryPB1"><div class='progressBar' id='memoryPB2'></div></div>
+	</div>
+	<div>
+		<div id='legacyTitle' class="head hasHover" onmouseover="ascensionMsg('legacy')" onclick="buyAscensionUpgrade('legacy')">
+			Convergent legacy<br>1000 cooler points
+		</div>
+		<div class="cell hoverText" id="legacy">
+			Currently: <div id='legacyCurrent'></div><br>
+			Upgrade: <div id='legacyUpgrade'></div>
+		</div>
+		<div class="cell" style="background:grey;padding:0" id="legacyPB1"><div class='progressBar' id='legacyPB2'></div></div>
+	</div>
+	<div></div>
+	<div></div>
+	<div>
+		<div id='kingdomExpansionTitle' class="head hasHover" onmouseover="ascensionMsg('kingdomExpansion')" onclick="buyAscensionUpgrade('kingdomExpansion')">
+			Kingdom expansion<br>1000 cooler points
+		</div>
+		<div class="cell hoverText" id="kingdomExpansion">
+			Currently: <div id='kingdomExpansionCurrent'></div><br>
+			Upgrade: <div id='kingdomExpansionUpgrade'></div>
+		</div>
+		<div class="cell" style="background:grey;padding:0" id="kingdomExpansionPB1"><div class='progressBar' id='kingdomExpansionPB2'></div></div>
+	</div>
+	<div>
+		<div id='kingdomManagementTitle' class="head hasHover" onmouseover="ascensionMsg('kingdomManagement')" onclick="buyAscensionUpgrade('kingdomManagement')">
+			Kingdom management<br>7000 cooler points
+		</div>
+		<div class="cell hoverText" id="kingdomManagement">
+			Currently: <div id='kingdomManagementCurrent'></div><br>
+			Upgrade: <div id='kingdomManagementUpgrade'></div>
+		</div>
+		<div class="cell" style="background:grey;padding:0" id="kingdomManagementPB1"><div class='progressBar' id='kingdomManagementPB2'></div></div>
+	</div>
+	<div>
+		<div id='chosenKingTitle' class="head hasHover" onmouseover="ascensionMsg('chosenKing')" onclick="buyAscensionUpgrade('chosenKing')">
+			The chosen one<br>10000 cooler points
+		</div>
+		<div class="cell hoverText" id="chosenKing">
+			Currently: <div id='chosenKingCurrent'></div><br>
+			Upgrade: <div id='chosenKingUpgrade'></div>
+		</div>
+		<div class="cell" style="background:grey;padding:0" id="chosenKingPB1"><div class='progressBar' id='chosenKingPB2'></div></div>
+	</div>
+	<div></div>
+	<div>
+		<div class='head' onclick="unprestige()">
+			Get out of here<br>FREE!!1!
+		</div>
+		<div class="cell" style="background:green;padding:0;color:#000;text-align:center;">not counting / &infin;</div>
+	</div>
+	<!--
+	<div>
+		<div id='Title' class="head hasHover" onmouseover="ascensionMsg('')" onclick="buyAscensionUpgrade('')">
+			<br> cooler points
+		</div>
+		<div class="cell hoverText" id="">
+			Currently: <div id='Current'></div><br>
+			Upgrade: <div id='Upgrade'></div>
+		</div>
+		<div class="cell" style="background:grey;padding:0" id="PB1"><div class='progressBar' id='PB2'></div></div>
+	</div>
+	-->
 </div>
+</div>
+<div id="main" class="animated">
 <div id="idleTab" class="tabcontent">
 	<button id="close" class="long large" onclick="this.parentElement.style.display='none'">Close</button>
 	<div id="idleStats">		
@@ -32,46 +160,75 @@
 <div id="basicSection" class="tabcontent">
 	<button id="close" class="large" onclick="this.parentElement.style.display='none'">Close</button>
 	<button id="sellButton" onclick="sellMode()">Buy</button>
-	<button id="buyMaxButton", onclick="buyMaximum()">One by One</button>
-	<button id="moreClick", onclick="buyMoreClick()", title="Increases base click by 1", disabled>More Clicks - lv. 0<br>10 points</button>
-	<button id="pointGen1", onclick="buyGen1()", title="Increases base generator power by 1", disabled>Point Generator - lv. 0<br>10 points</button>
-	<button id="betterClick", onclick="buyBetterClick()", title="Increases click power by 25%", disabled>Better Clicks - lvl. 0<br>250 points</button>
-	<button id="strongGen1", onclick="buyStrongGen1()", title="Increases generator production by 25%", disabled>Stronger Generator - lvl. 0<br>250 points</button>
-	<button id="percentClick", onclick="buyPercentClick()", title="Increases click power by 1% of the points per second", disabled>Synergy - lvl. 0<br>100 points</button>
-	<button id="basicDiscount" onclick="buyBasicDiscount()" title="Gives a 10% discount on everything", disabled>Discount - lvl. 0<br>100 points</button>
-	<button id="idleKing" onclick="buyIdleKing()" title="Gives a bonus to production every second after you stop clicking, up to 50% after a minute", disabled>The Idle King - lvl. 0<br>1000 points</button>
+	<button id="buyMaxButton" onclick="buyMaximum()">One by One</button>
+	
+	<div class='tooltip'>
+	<button id="moreClick" onclick="buySomething('baseClick')" disabled>More Clicks - lv. 0<br>10 points</button>
+	<span class='tooltipText'>Increases base click by 1</span>
+	</div>
+	
+	<div class='tooltip'>
+	<button id="pointGen1" onclick="buySomething('gen1Power')" disabled>Point Generator - lv. 0<br>10 points</button>
+	<div class='tooltipText'>Increases base generator power by 1</div>
+	</div>
+	
+	<div class='tooltip'>
+	<button id="betterClick" onclick="buySomething('betterClickAmt')" disabled>Better Clicks - lvl. 0<br>250 points</button>
+	<div class='tooltipText'>Increases click power by 25%</div>
+	</div>
+	
+	<div class='tooltip'>
+	<button id="strongGen1" onclick="buySomething('strongGen1')" disabled>Stronger Generator - lvl. 0<br>250 points</button>
+	<div class='tooltipText'>Increases generator production by 25%</div>
+	</div>
+	
+	<div class='tooltip'>
+	<button id="percentClick" onclick="buySomething('percentClick')" disabled>Synergy - lvl. 0<br>100 points</button>
+	<div class='tooltipText' id='percentClickTt'>Increases click power by 1% of the points per second</div>
+	</div>
+	
+	<div class='tooltip'>
+	<button id="basicDiscount" onclick="buySomething('basicDiscountAmt')" disabled>Discount - lvl. 0<br>100 points</button>
+	<div class='tooltipText'>Gives a 10% discount on most upgrades</div>
+	</div>
+	
+	<div class='tooltip'>
+	<button id="idleKing" onclick="buySomething('idleKing')" disabled>The Idle King - lvl. 0<br>1000 points</button>
+	<div class='tooltipText' id='idleKingTt'>Gives a bonus to production every second after you stop clicking, up to 50% after 60s</div>
+	</div>
 </div>
 <div class="tab floatRight" id="idleUpgradeSections">
-<button class="tablink large" onclick="openIdleTab(event, 'basicSection')">Upgrades</button>
-<button id="ascensionButton" class="tablink large" onclick="openIdleTab(event, 'ascensionSection')" style="display:none" disabled>Ascend</button>
-<button class="tablink large" onclick="openIdleTab(event, 'idleTab')">Stats</button>
+<button class="large" onclick="openTab('basicSection',false)">Upgrades</button>
+<button class="large" onclick="openTab('idleTab',false)">Stats</button>
+<button id="ascensionButton" onclick="prestige()" style="display:none">Ascend</button>
+<button id='companionBox' onclick='companionBox()' style='height:60px;'>loading...</button>
 </div>
 <div style="padding-left:5px">
-<p id="pointCounter", class="large">You have 0 points</p> <br><br>
-<p id="ppsCounter"></p><br>
-<p id="clickPower">You have 1 click power</p><br><br>
-<button onclick="clickPoints()", class="large">Get Points!</button> <br><br>
-<p id="highscoreDisplay", class="floatLeft noMargin">You don't have a highscore :c</p>
+<p id="pointCounter", class="large animated">You have 0 points</p> <br><br>
+<p id="ppsCounter" class="animated"></p><br>
+<p id="clickPower" class="animated">You have 1 click power</p><br><br>
+<button onclick="clickPoints()", class="large animated">Get Points!</button> <br><br>
+<p id="highscoreDisplay", class="floatLeft noMargin animated">You don't have a highscore :c</p><br>
+<p id="trueHighScore", class="floatLeft noMargin animated"></p>
 </div>
 
 <script src="../code/idle.js" type="text/javascript"></script>
+<script src="../code/trophies.js" type="text/javascript"></script>
+<script src="../code/universal.js" type="text/javascript"></script>
 <script src="../code/news.js" type="text/javascript"></script>
 		</div>
-		<div id="footer">
+		<div id="achievementsDisplay" style="background-color:var(--darkerBack)" class="long"></div>
+		<div id="footer" class="animated">
 		Made by Ibaraki DX
 		</div>
 	</div>
 
-
-<script>function initThemeSelector(){
-	const themeStylesheetLink = document.getElementById("themeStylesheetLink");
-	const currentTheme = localStorage.getItem("theme") || "metal";
-		
-	function activateTheme(metal){
-		themeStylesheetLink.setAttribute("href", `../design/css/themes/${metal}.css`);
-	}
-		
-	activateTheme(currentTheme);
+<script>
+initThemeSelector()
+if(!secretTrophies.insisting){
+selfDestruct(document.getElementById('companionBox'))
 }
-initThemeSelector();</script>
+
+</script>
+
 </body>

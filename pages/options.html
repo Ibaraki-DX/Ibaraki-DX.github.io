@@ -5,57 +5,105 @@
 <title>Ibaraki's page</title>
 </head>
 <body>
-	<div id="wrapper">
-		<div id="top">
+<div id='hoverGrid' class='hoverGrid'></div>
+	<div id="wrapper" class="animated">
+		<div id="top" class="animated">
 		<h1 class="large noMargin floatLeft paddingLeft">Yoo, welcome!</h1>
-			<div id="topButtons", class="floatRight">
+			<div id="topButtons", class="floatRight animated">
 			<a href="projects.html"><button>Games</button></a>
-			<button disabled>Achievements</button>
+			<a href="trophies.html"><button>Achievements</button></a>
 			<a href="options.html"><button>Options</button></a>
 			<a href="others.html"><button>Others</button></a>
 			</div>
 		</div>
-		<div id="main" style="padding:5px">
-		<p>Choose a theme:</p><br>
+<div class="container"><div id="matrixBackground" class='matrix'></div><div id="lanterns" class='lights'></div></div>
+		<div id="main" style="padding:5px" class="animated">
+		<div>
+		<p>Choose a theme:				</p><br>
 		<select id="themeSelect">
 			<option value="metal">Metal</option>
 			<option value="light">Flash Bomb</option>
 			<option value="dark">The Abyss stares back</option>
 			<option value="matrix">Wake up, Neo</option>
 			<option value="bee">B e e</option>
-			<option value="angry">For the Blood God</option>
 			<option value="bsod">B.S.O.D.</option>
 			<option value="magik">Magik</option>
-		</select><br>
-		<p>Choose a number type</p><br>
+			<option value="corruption">World worm</option>
+			<option value="crimson">Big brain time</option>
+			<option value="calm">Festival</option>
+			<option value="hover">Bad signal</option>
+		</select>
+		</div>
+		<div id='hoverStyle'>
+		<br>
+		<p>How the hover works:</p><br>
+		<select id='hoverStyleSelect'>
+		<option value='drawing'>Color cycle</option>
+		<option value='random'>Random color</option>
+		</select>
+		</div>
+		<br>
+		<div>
+		<p>Choose a number type:		</p><br>
 		<select id="numTypeSelect">
 			<option value="long">Long</option>
 			<option value="scientific">Scientific</option>
 			<option value="engineering">Engineering</option>
+			<option value="base2">Base 2</option>
+			<option value="letter">Letters</option>
+			<option value="compact">Compacted</option>
+			<option value="normal">Normal</option>
 		</select>
+		</div>
+		<br>
+		<div>
+		<p>Jukebox playlist:</p><br>
+		<select id="jukeboxPlaylist">
+			<option>waiting - by Ibaraki DX</option>
+		</select><br>
+		we only have one music for now and idk what im doing<br>
+		</div>
+		<br>
+		<div>
+		<p>Rainbow effect speed:</p> <br>
+		<select id="rainbowSelect">
+			<option value="50">20 updates per second</option>
+			<option value="100">10 updates per second</option>
+			<option value="200">5 updates per second</option>
+			<option value="250">4 updates per second</option>
+			<option value="500">2 updates per second</option>
+			<option value="1000">1 update per second</option>
+			<option value="2000">1 update every 2 seconds</option>
+			<option value="5000">1 update every 5 seconds</option>
+		</select><br>
+		</div>
+		<br>
+		<br>
 		<br>
 		<p>Wipe the idle data</p>
 		<br>
 		<button class="floatleft" onclick="confirmWipeIdle()"><h1>W I P E</h1></button>
 		<div id="wipeIdleData" style="display:none"></div>
+		
+<script src="../code/universal.js" type="text/javascript"></script>
 		<script>
-		function initThemeSelector(){
 			const themeSelect = document.getElementById("themeSelect");
-			const themeStylesheetLink = document.getElementById("themeStylesheetLink");
 			const currentTheme = localStorage.getItem("theme") || "metal";
-		
-		function activateTheme(metal){
-			themeStylesheetLink.setAttribute("href", `../design/css/themes/${metal}.css`);
-		}
-		
+				
+if(currentTheme == 'hover'){
+	document.getElementById('hoverStyle').style.display = 'block'
+} else {
+document.getElementById('hoverStyle').style.display = 'none'}
 		themeSelect.addEventListener("change", ()=>{
-			activateTheme(themeSelect.value);
 			localStorage.setItem("theme", themeSelect.value);
+			location.reload()
+if(themeSelect.value == 'hover'){
+	document.getElementById('hoverStyle').style.display = 'block'
+} else {
+document.getElementById('hoverStyle').style.display = 'none'}
 		});
 		
-		themeSelect.value = currentTheme;
-		activateTheme(currentTheme);
-		}
+		themeSelect.value = currentTheme;		
 		initThemeSelector();
 		
 		function initNumType(){
@@ -68,6 +116,14 @@
 			numTypeSelect.value = currentNumType;
 		}
 		initNumType();
+		
+		
+		
+document.getElementById('rainbowSelect').value = rainbowSpeed
+
+document.getElementById('rainbowSelect').addEventListener("change", function(e) {
+	localStorage.setItem("rainbowSpeed", e.currentTarget.value)
+})
 		
 		var confirmationText = "restart";
 		
@@ -92,45 +148,69 @@
 		function idleGone(){
 			if(document.getElementById("textWipe").value == confirmationText){
 			var idleData ={
-	points: 0.0,
+	points: 0,
 	baseClick:0,
-	baseBonus:1.0,
 	percentClick:0,
 	gen1Power:0,
-	gen1Bonus:1.0,
-	highestScore:0,
+	highScore:0,
+	trueHighScore:0,
 	betterClickAmt:0,
 	strongGen1:0,
-	lambdaDiscount:0,
-	betterClick:1.25,
-	betterGen:1.25,
-	logPower:false,
+	logPower:0,
 	allTimePoints:0,
-	synergyBonus:0.01,
-	basicDiscount:0.9,
 	basicDiscountAmt:0,
 	idleKing:0,
 	idleKingBonus:0.0,
-	idleKingCap:0.5,
 	buyMax:false,
-	version:2,
-	thisAscension:Date.now(),
+	thisAscension:0,
 	fastAscension:0,
 	numOfAscensions:0,
 	firstTimeAll:Date.now(),
 	lastTick:Date.now(),
 	lastClick:Date.now(),
 	sell:false,
-	sellBack:0.75
+	coolerPoints:0,
+	totalCool:0,
+	haltProduction:false,
+	haltClicks:false,
+	omega:false,
+	legacy:0,
+	highestPPS:0,
+	equipedReference:"none",
+	chanceMakerTimer:0,
+	lastChanceMakerActivation:0,
+	portalCycleWorld:"normal",
+	extraSynergy:0,
+	starterPack:0,
+	comboPack:0,
+	kingdomExpansion:0,
+	kingdomManagement:0,
+	chosenKing:0,
+	memory:0,
+	hasSold:false,
+	onAscension:false
 }
 				localStorage.setItem("idleSave", JSON.stringify(idleData))
+				location.reload()
 			} else{
 			document.getElementById("wipeIdleData").innerHTML = "Damn, that was the wrong password..."
 			}
 		}
+		
+		function initHoverStyle(){
+			const hoverStyleSelect = document.getElementById("hoverStyleSelect");
+			const currentHoverStyle = localStorage.getItem('gridHoverType') || 'drawing'
+			
+			hoverStyleSelect.addEventListener("change", ()=>{
+				localStorage.setItem("gridHoverType",hoverStyleSelect.value);
+			});
+			hoverStyleSelect.value = currentHoverStyle;
+		}
+		initHoverStyle();
+		
 		</script>
 		</div>
-		<div id="footer">
+		<div id="footer" class="animated">
 		Made by Ibaraki DX
 		</div>
 	</div>

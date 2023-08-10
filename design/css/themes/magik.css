@@ -1,10 +1,10 @@
 :root{
-	--detail: #0ff;
+	--detail: var(--rainbow);
 	--lighterBack: #c0c;
 	--darkerBack: #609;
 	--font: #0ff;
-	--buttonBack: #c0c;
-	--buttonFont: #ff0;
-	--buttonBorder:#f0f;
+	--buttonBack: #426;
+	--buttonFont: var(--rainbow);
+	--buttonBorder:var(--rainbow);
 	--buttonDisabled: #a0c;
 }
