@@ -79,6 +79,14 @@
 		</div>
 		<br>
 		<br>
+		<div>
+		<p>Copy your idle save:</p><br>
+		<input type='text' id='saveCopy'></input>
+		</div><br>
+		<div>
+		<p>Load an idle save:</p><br>
+		<input type='text' id='saveLoad'></input><button onClick='loadIdleSave()'>Load</button>
+		</div><br>
 		<br>
 		<p>Wipe the idle data</p>
 		<br>
@@ -208,6 +216,14 @@ document.getElementById('rainbowSelect').addEventListener("change", function(e) 
 		}
 		initHoverStyle();
 		
+		
+	document.getElementById('saveCopy').value = encrypt(localStorage.getItem('idleSave'),'funKiller()')
+	
+	function loadIdleSave(){
+		if(sure()){
+			localStorage.setItem('idleSave', decrypt(document.getElementById('saveLoad').value,'funKiller()'))
+		}
+	}
 		</script>
 		</div>
 		<div id="footer" class="animated">

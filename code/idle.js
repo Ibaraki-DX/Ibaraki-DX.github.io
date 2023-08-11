@@ -48,13 +48,13 @@ var idlePrices = [
 [100, 2, false, 'basicDiscountAmt'],
 [1000, 100, false, 'idleKing'],
 [10, 10000, false, 'logPower'],
-[125, 5, false, 'extraSynergy'],
+[125, 4, false, 'extraSynergy'],
 [5, 2, false, 'starterPack'],
 [20, 20, false, 'comboPack'],
 [100, 100, false, 'memory'],
 [1000, 10**6, false, 'legacy'],
-[1000, 7, false, 'kingdomExpansion'],
-[7000, 7, false, 'kingdomManagement'],
+[470, 7, false, 'kingdomExpansion'],
+[2700, 7, false, 'kingdomManagement'],
 [10**5, 1000, false, 'chosenKing']
 //[base price, price scale, discount, id]
 ]
@@ -66,7 +66,7 @@ var idleImportant = {
 	synergyBonus:0.01,
 	basicDiscount:0.9,
 	idleKingCap:0.5,
-	version:4,
+	version:5,
 	sellBack:0.75,
 	coolFactor:0.001,
 	buyMax:false,
@@ -76,16 +76,21 @@ var idleImportant = {
 function clickPoints(){
 	if(idleData.haltClicks) {return}
 	if(Date.now()-idleData.lastClick >= 100){
-	idleData.points += clickBonus() + idleData.percentClick*idleImportant.synergyBonus*totalPPS()*(idleData.extraSynergy/2+1);
-	idleData.allTimePoints +=clickBonus()+idleData.percentClick*idleImportant.synergyBonus*totalPPS()*(idleData.extraSynergy/2+1);	
+	idleData.points += clickBonus() + synergyTotal()
+	idleData.allTimePoints +=clickBonus() + synergyTotal()	
 	idleData.lastClick = Date.now();
 	}
 	idleData.idleKingBonus = 0;
 	visualUpdate();	
 }
 
+function synergyTotal(){
+	let x = idleData.percentClick*idleImportant.synergyBonus*totalPPS()*(idleData.extraSynergy/2+1);
+	return x
+}
+
 function totalPPS(){
-	var x = gen1PPS()*(1+idleData.idleKingBonus)*(1+idleImportant.coolFactor*idleData.totalCool);
+	let x = gen1PPS()*(1+idleData.idleKingBonus)*(1+idleImportant.coolFactor*idleData.totalCool);
 	
 	if(idleData.logPower==1&&log(10,idleData.highScore)/2>1){x*=log(10, idleData.highScore)/2} else
 	if(idleData.logPower==2&&log(10,idleData.highScore)>1){x*=log(10, idleData.highScore)} else
@@ -101,7 +106,7 @@ function totalPPS(){
 //calculates only the points per second of the 1st generator
 function gen1PPS(){
 	if(document.getElementById("main").style.display == "none"&&document.getElementById("offlineIdle").style.display == "none") return 0;
-	var x = idleData.gen1Power*idleImportant.gen1Bonus*idleImportant.betterGen**idleData.strongGen1;
+	let x = idleData.gen1Power*idleImportant.gen1Bonus*idleImportant.betterGen**idleData.strongGen1;
 	return x;
 }
 
@@ -114,7 +119,7 @@ function update(){
 	diff = (Date.now() - idleData.lastTick)/1000;
 	if(idleData.points<0) idleData.points=0
 	if(!idleData.haltProduction){
-		x=totalPPS()*diff
+		let x =totalPPS()*diff
 		if(x>0){
 			idleData.points+=x;
 			idleData.allTimePoints+=x;
@@ -150,7 +155,7 @@ if(document.getElementById('ascensionSection').style.display=='none'){
 	document.getElementById("ppsCounter").innerHTML = "You are getting " + format(totalPPS()) + " points per second";
 	} else document.getElementById("ppsCounter").innerHTML = ''
 	//click power display
-	document.getElementById("clickPower").innerHTML = "You have " + format(clickBonus() + (idleData.percentClick*idleImportant.synergyBonus*totalPPS())) + " click power"
+	document.getElementById("clickPower").innerHTML = "You have " + format(clickBonus() + (idleData.percentClick*idleImportant.synergyBonus*totalPPS()*(idleData.extraSynergy/2+1))) + " click power"
 	
 	//halted production
 	if(idleData.haltProduction)	document.getElementById("ppsCounter").innerHTML = "Production has been halted!"
@@ -199,7 +204,7 @@ if(document.getElementById('ascensionSection').style.display=='none'){
 	document.getElementById('idleKingTt').innerHTML = 'Gives a bonus to production every second after you stop clicking, up to ' + (idleImportant.idleKingCap*100) + '% after '+ format(60*0.9**idleData.kingdomManagement) +'s'
 	
 	//show the ascension button
-	if(idleData.points<10**9){
+	if(idleData.highScore<10**9){
 		document.getElementById("ascensionButton").style.display = "none";
 	} else{
 		document.getElementById("ascensionButton").style.display = "block";
@@ -245,7 +250,7 @@ function thingAmount(thing){
 
 function thingPrice(thing){
 	//set everything necessary
-	x = 'thing not found'
+	let x = 'thing not found'
 	/*gBoost = 1
 	if(thing=='betterClickAmt') {gBoost = idleImportant.betterClick} else
 	if(thing=='strongGen1') {gBoost = idleImportant.betterGen}*/
@@ -262,8 +267,9 @@ function buySomething(thing){
 	if(!idleImportant.sell){	
 	idleData.points-=thingPrice(thing);
 	idleData[thing]++;
-	if(idleImportant.buyMax&&thingPrice(thing)<idleData.points) buySomething(thing)
-	} else {
+	if(idleImportant.buyMax&&thingPrice(thing)<=idleData.points) buySomething(thing)
+	} else 
+	if(thingAmount(thing)>0) {
 	hasSold = true
 	idleData.points+=thingPrice(thing);
 	idleData[thing]--;
@@ -275,9 +281,9 @@ function buySomething(thing){
 function price(a, x, n, bdiscount){
 	if(idleImportant.sell) n--;
 	if(n>=0){		
-	var z = round(a*x**n);
+	let z = round(a*x**n);
 	if(bdiscount){
-		z*=idleImportant.basicDiscount**(idleData.basicDiscountAmt+floor(idleData.basicDiscountAmt/(10-idleData.comboPack)));
+		z*=basicDiscounting();
 		if(idleData.equipedReference=="cookie clicker")
 			z*=0.93
 	}
@@ -285,6 +291,10 @@ function price(a, x, n, bdiscount){
 		z *= idleImportant.sellBack;
 	return round(z);
 	} else return 0;
+}
+
+function basicDiscounting(){
+	return idleImportant.basicDiscount**(idleData.basicDiscountAmt+floor(idleData.basicDiscountAmt/(10-idleData.comboPack)))
 }
 
 /*function priceG(a, x, y, n, bdiscount){
@@ -302,9 +312,11 @@ function price(a, x, n, bdiscount){
 }*/
 
 function clickBonus(){
-	var x = ((idleData.baseClick+1) * idleImportant.baseBonus * idleImportant.betterClick**idleData.betterClickAmt);
-	if(idleData.logPower==true)
-		x*=log(10,idleData.points)
+	let x = ((idleData.baseClick+1) * idleImportant.baseBonus * idleImportant.betterClick**idleData.betterClickAmt);
+	
+	if(idleData.logPower==1&&log(10,idleData.highScore)/2>1){x*=log(10, idleData.highScore)/2} else
+	if(idleData.logPower==2&&log(10,idleData.highScore)>1){x*=log(10, idleData.highScore)} else
+	if(idleData.logPower==3&&log(5,idleData.highScore)>1){x*=log(5, idleData.highScore)}
 	return x;
 }
 
@@ -364,7 +376,7 @@ function getStats(){
 
 		//veery big spaghetti
 		diff = (Date.now()-idleData.firstTimeAll)/1000;
-		document.getElementById("idleStats").innerHTML = "<p style=\"padding: 5px\">All time points = "+format(idleData.allTimePoints) + "<br>Base click = "+idleData.baseClick+"<br>Base click bonus = "+ idleImportant.baseBonus +"x<br>First generator production = " + idleData.gen1Power + "<br>Generator 1 bonus = " + idleImportant.gen1Bonus + "x<br>Total synergy = " + round(idleData.percentClick*idleImportant.synergyBonus*100)+"% of the points per second<br>Total basic discount = " + (100-idleImportant.basicDiscount**(idleData.basicDiscountAmt+floor(idleData.basicDiscountAmt%10))*100) + "% off<br>Better click bonus = " + round(idleImportant.betterClick**idleData.betterClickAmt) + "x<br>Stronger generator bonus = " + round(idleImportant.betterGen**idleData.strongGen1) + "x<br>Idle king cap: "+ idleImportant.idleKingCap*idleData.idleKing*100 +"%<br> Idle king bonus: "+ format(idleData.idleKingBonus*100) +"%<br>Playing for: " + floor(diff/86400) + " days, "+ floor((diff%86400)/3600) + " hours, "+ floor((diff%3600)/60) + " minutes, " + floor(diff%60) + " seconds</p>";
+		document.getElementById("idleStats").innerHTML = "<p style=\"padding: 5px\">All time points = "+format(idleData.allTimePoints) + "<br>Base click = "+idleData.baseClick+"<br>Base click bonus = "+ idleImportant.baseBonus +"x<br>First generator production = " + idleData.gen1Power + "<br>Generator 1 bonus = " + idleImportant.gen1Bonus + "x<br>Total synergy = " + round(idleData.percentClick*idleImportant.synergyBonus*100)+"% of the points per second<br>Total basic discount = " + (100-basicDiscounting()*100) + "% off<br>Better click bonus = " + round(idleImportant.betterClick**idleData.betterClickAmt) + "x<br>Stronger generator bonus = " + round(idleImportant.betterGen**idleData.strongGen1) + "x<br>Idle king cap: "+ idleImportant.idleKingCap*idleData.idleKing*100 +"%<br> Idle king bonus: "+ format(idleData.idleKingBonus*100) +"%<br>Playing for: " + floor(diff/86400) + " days, "+ floor((diff%86400)/3600) + " hours, "+ floor((diff%3600)/60) + " minutes, " + floor(diff%60) + " seconds</p>";
 	}	
 }
 	//update the stats tab
@@ -388,7 +400,7 @@ function sellMode(){
 }
 
 function calcPrestige(){
-	x = (Math.cbrt(idleData.highScore)*log(10, 10*idleData.highScore))/1000;
+	let x = (Math.cbrt(idleData.highScore)*log(10, 10*idleData.highScore))/1000;
 	return x
 }
 
@@ -398,9 +410,10 @@ if(sure()){
 	document.getElementById('main').style.display = 'none'
 	document.getElementById('ascensionSection').style.display = 'block'
 	prestiged = Date.now();
+	idleData.inAscension = true
 	idleData.haltProduction=true;
 	idleData.haltClicks=true;
-	x = calcPrestige()
+	let x = calcPrestige()
 	idleData.totalCool += x;
 	idleData.coolerPoints += x;
 	idleData.points = 0;
@@ -485,7 +498,7 @@ var achievementUpdate = window.setInterval(function(){
 		achieveCheck("idleKing03","Where are we going, King?")
 		idleTrophies.idleKing03=true
 	}
-	if(!idleTrophies.old&&Date.now()-idleData.firstTimeAll>=86400000){
+	if(!idleTrophies.old&&Date.now()-idleData.firstTimeAll>=1209600000){
 		achieveCheck("old","An old man")
 		idleTrophies.old=true
 	}
@@ -670,8 +683,8 @@ function buyAscensionUpgrade(name){
 	setAscensionLimit(name)	
 	
 	if(idleData[name]<limit||idleData.omega&&idleData[name]<limitOver){
-		x = thingPrice(name)
-		if(idleData.coolerPoints>x){
+		let x = thingPrice(name)
+		if(idleData.coolerPoints>=x){
 			idleData[name]++
 			idleData.coolerPoints-=x
 			progressBar(idleData[name],name)	
@@ -716,15 +729,17 @@ function unprestige(){
 	
 	//apply the starter pack
 	
+	idleData.basicDiscountAmt = floor(idleData.starterPack*5/idlePrices[5][1]);
+	idleData.idleKing = floor(idleData.starterPack*5/idlePrices[6][1]);
+	
 	idleData.baseClick = floor(idleData.starterPack*5/idlePrices[0][1]);
 	idleData.gen1Power = floor(idleData.starterPack*5/idlePrices[1][1]);
 	idleData.betterClickAmt = floor(idleData.starterPack*5/idlePrices[2][1]);
 	idleData.strongGen1 = floor(idleData.starterPack*5/idlePrices[3][1]);
 	idleData.percentClick = floor(idleData.starterPack*5/idlePrices[4][1]);
-	idleData.basicDiscountAmt = floor(idleData.starterPack*5/idlePrices[5][1]);
-	idleData.idleKing = floor(idleData.starterPack*5/idlePrices[6][1]);
 	
 	idleData.hasSold = false;
+	idleData.inAscension = false;
 	
 	correctVariables()
 	
@@ -807,7 +822,5 @@ function setAscensionLimit(name){
 	}
 }
 
-function sure(){
-	return confirm('Are you sure?\nPress "OK" to proceed')
-}
+
 

@@ -35,6 +35,7 @@ newsArray = [
 ['&#x1f914;',true,'r30'],
 ['I forgot what I was going to write :^)',true,'r31'],
 ['Crazy? I was crazy once. They locked me in a room. A rubber room. A rubber room with rats. And rats make me crazy. Crazy? I was crazy once. They locked me in a room. A rubber room. A rubber room with rats. And rats make me crazy. Crazy? I was crazy once. They locked me in a room. A rubber room. A rubber room with rats. And rats make me crazy. Crazy? I was crazy once. They locked me in a room. A rubber room. A rubber room with rats. And rats make me crazy. Crazy?',true,'r32'],
+['99.99% of the quotes and statistics you find online are fake and made up - Albert Einstein'],
 //clickable
 ["<a href=https://youtu.be/HUtTC9x14mY?t=2 target='_blank'>Click here to not win a prize!</a>",true,"c01"],
 ["<a href=https://youtu.be/dQw4w9WgXcQ target='_blank'>https://youtu.be/dQw4w9WgXcQ</a>",true,"c02"],

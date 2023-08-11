@@ -66,7 +66,7 @@ var secretTrophies = {
 }
 
 function trophyCount(type){
-	x = 0
+	let x = 0
 	if(type=='idle'){
 	Object.entries(idleTrophies).forEach(([key, val])=>{if(val==true) x++})
 	}
@@ -266,7 +266,7 @@ function completed(elementid){
 
 function luckyDay(){
 	function luckyThrow(){
-		x = rng(1, 1000000)
+		let x = rng(1, 1000000)
 		if(x==1) {
 			secretTrophies.luckyDay = true
 			saveAchievements()

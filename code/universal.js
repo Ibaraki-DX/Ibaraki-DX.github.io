@@ -346,7 +346,7 @@ function isPrime(x){
 
 
 function coolGrid(){
-	x = Date.now()
+	let x = Date.now()
 	const niceGrid = document.getElementById('hoverGrid')
 	niceGrid.style.setProperty('height','100%')
 	niceGrid.style.setProperty('width','95vw')
@@ -377,4 +377,31 @@ function coolGridHover(i){
 	if(rs=='rgb(102, 102, 102)') {r.style.backgroundColor = '#101010'} else
 	if(rs=='rgb(16, 16, 16)') {r.style.backgroundColor = '#000'}	
 	}
+}
+
+//thanks jorgeblom and metatron, there is so much i still need to learn ;w;
+
+function encrypt(string, key){
+	
+	let convertedString = (txt) => txt.split('').map((zero) => zero.charCodeAt()) 
+	
+	let applyKey = (code) => convertedString(key).reduce((a, b) => a^b, code)
+	
+	let hexConvert = (num) => ('0'+num.toString(16)).substr(-2);
+
+	return string.split('').map(convertedString).map(applyKey).map(hexConvert).join('')
+	
+}
+
+function decrypt(string, key){
+	
+	let convertedString = (txt) => txt.split('').map((zero) => zero.charCodeAt()) 
+	
+	let applyKey = (code) => convertedString(key).reduce((a, b) => a^b, code)
+	
+	return string.match(/.{1,2}/g).map((hex) => parseInt(hex, 16)).map(applyKey).map((charCode) => String.fromCharCode(charCode)).join('')
+}
+
+function sure(){
+	return confirm('Are you sure?\nPress "OK" to proceed')
 }
