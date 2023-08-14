@@ -35,7 +35,7 @@ newsArray = [
 ['&#x1f914;',true,'r30'],
 ['I forgot what I was going to write :^)',true,'r31'],
 ['Crazy? I was crazy once. They locked me in a room. A rubber room. A rubber room with rats. And rats make me crazy. Crazy? I was crazy once. They locked me in a room. A rubber room. A rubber room with rats. And rats make me crazy. Crazy? I was crazy once. They locked me in a room. A rubber room. A rubber room with rats. And rats make me crazy. Crazy? I was crazy once. They locked me in a room. A rubber room. A rubber room with rats. And rats make me crazy. Crazy?',true,'r32'],
-['99.99% of the quotes and statistics you find online are fake and made up - Albert Einstein'],
+['99.99% of the quotes and statistics you find online are fake and made up - Albert Einstein',true,'r32'],
 //clickable
 ["<a href=https://youtu.be/HUtTC9x14mY?t=2 target='_blank'>Click here to not win a prize!</a>",true,"c01"],
 ["<a href=https://youtu.be/dQw4w9WgXcQ target='_blank'>https://youtu.be/dQw4w9WgXcQ</a>",true,"c02"],
@@ -60,12 +60,12 @@ newsArray = [
 ["Breaking news 2: The Return of The Broken News",true,"n05"],
 ["Breaking news: The dev was found cutting virtual grass, he is probably training to touch real one",true,"n06"],
 //references
-["Breaking news: The entity known as \"You\" just turned one more idleverse into a cookie production machine, our scientists are now scared of cookies", newsTrophies.multiverse,"rc01"],
-["Breaking news: Illegal cookie mine was discovered and destroyed - The cookie entity is not pleased, but it is busy cloning itself",newsTrophies.multiverse,"rc02"],
-["Breaking news: Idleverse made of antimatter somehow surpassed infinity, our bad scientists worry it might overflow",newsTrophies.multiverse,"ra01"],
-["Fixing news: Low levels of antimatter were detected on the news ticker, we aren't working on the issue",newsTrophies.multiverse,"ra02"],
-["Breaking news: Random person appeared out of a portal, killed half the city's slime population, and left in another portal a couple hours later",newsTrophies.multiverse,"ri01"],
-['Breaking news: We found a random person pushing a massive boulder around, we asked why but the only thing the person said was: "Do you have any candy to pass time?"',newsTrophies.multiverse,'rs01'],
+["Breaking news: The entity known as \"You\" just turned one more idleverse into a cookie production machine, our scientists are now scared of cookies", newsTrophies.multiverse&&rng(1, 20)==20,"rc01"],
+["Breaking news: Illegal cookie mine was discovered and destroyed - The cookie entity is not pleased, but it is busy cloning itself",newsTrophies.multiverse&&rng(1, 20)==20,"rc02"],
+["Breaking news: Idleverse made of antimatter somehow surpassed infinity, our bad scientists worry it might overflow",newsTrophies.multiverse&&rng(1, 20)==20,"ra01"],
+["Fixing news: Low levels of antimatter were detected on the news ticker, we aren't working on the issue",newsTrophies.multiverse&&rng(1, 20)==20,"ra02"],
+["Breaking news: Random person appeared out of a portal, killed half the city's slime population, and left in another portal a couple hours later",newsTrophies.multiverse&&rng(1, 20)==20,"ri01"],
+['Breaking news: We found a random person pushing a massive boulder around, we asked why but the only thing the person said was: "Do you have any candy to pass time?"',newsTrophies.multiverse&&rng(1, 20)==20,'rs01'],
 //["",true,""],
 ["Hello world!",true,"r00"]
 ];

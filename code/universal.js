@@ -98,6 +98,7 @@ function initThemeSelector(){
 function log(base, num){
 if(base==2){return Math.log2(num)} else 
 if(base==10){return Math.log10(num)} else
+if(base=='e'){return Math.log(num)}
 return Math.log(num)/Math.log(base)
 }
 
@@ -109,6 +110,17 @@ function rng(min, max){
 	min = Math.ceil(min)
 	max = Math.floor(max)
 	return Math.floor(Math.random() * (max-min+1) + min)
+}
+function sumPATerms(term1, progression, n){
+	return format((2*term1+progression*(n-1))*n/2)
+}
+function sumPGTerms(term1, progression, n){
+	if(progression == 1) return term1
+	return (term1*(progression**n-1))/(progression-1)
+}
+function factorial(num){
+	if(num == 0) {return 1}
+	else return num*factorial(num-1)
 }
 
 function format(number) {
@@ -171,7 +183,7 @@ function format(number) {
 		ten = ["","Deci","Viginti","Triginti","Quadraginti","Quiquaginti","Sexaginti","Septaginti","Octaginti","Nonaginti"]
 		cent = ["","Centi","Duocenti","Trecenti","Quadringenti","Quingenti","Sexacenti","Septingenti","Octingenti","Nongenti"]
 		do{
-			if(order%1000>=0&&order%1000<=9) {uni = ["","Mi","Dumi","Trimi","Quadrimi","Quinmi","Sexmi","Septimi","Octimi","Nonimi"]} else {uni = ["","Un","Duo","Tres","Qua","Quin","Sext","Sept","Octi","Noni"]}
+			if(order%1000>=0&&order%1000<=9) {uni = ["","Mi","Dumi","Trimi","Quadrimi","Quinmi","Sexmi","Septimi","Octimi","Nonimi"]} else {uni = ["","Un","Duo","Tres","Qua","Quin","Sex","Sep","Octi","Noni"]}
 			if(floor(order/10)%10==0&&floor(order/100)%10==0) {uni = ["","Mi","Bi","Tri","Quadri","Quinti","Sexti","Septi","Octi","Noni"]}
 			if(order%1000==0) {uni[0] = "Ni"} else {uni[0] = ""}
 			numString = uni[order%10]+ten[floor(order/10)%10]+cent[floor(order/100)%10]+"lli"+numString
@@ -405,3 +417,4 @@ function decrypt(string, key){
 function sure(){
 	return confirm('Are you sure?\nPress "OK" to proceed')
 }
+
