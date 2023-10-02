@@ -537,6 +537,10 @@ var savegame = JSON.parse(localStorage.getItem("idleSave"))
 	Object.entries(savegame).forEach(([key, val]) => {if(idleData[key]!=undefined) {idleData[key] = val}})
 
 function eachSecond(){
+	if(!secretTrophies.luckyDay&&rng(1,10**6)==1){
+		achieveCheck("lucky","Lucky day")
+		secretTrophies.luckyDay=true
+	}
 	if(document.getElementById('main').style.display!='none'){
 
 		if(idleData.idleKingBonus+idleImportant.idleKingCap*idleData.idleKing/(60*0.87**idleData.kingdomManagement)<idleImportant.idleKingCap*idleData.idleKing)
