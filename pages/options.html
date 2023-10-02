@@ -17,7 +17,7 @@
 			</div>
 		</div>
 <div class="container"><div id="matrixBackground" class='matrix'></div><div id="lanterns" class='lights'></div></div>
-		<div id="main" style="padding:5px" class="animated">
+		<div id="main" style="padding:5px" class="animated select">
 		<div>
 		<p>Choose a theme:				</p><br>
 		<select id="themeSelect">
@@ -51,6 +51,7 @@
 			<option value="engineering">Engineering</option>
 			<option value="base2">Base 2</option>
 			<option value="letter">Letters</option>
+			<option value="letter++">Letters funny dlc</option>
 			<option value="compact">Compacted</option>
 			<option value="normal">Normal</option>
 		</select>
@@ -59,9 +60,10 @@
 		<div>
 		<p>Jukebox playlist:</p><br>
 		<select id="jukeboxPlaylist">
-			<option>waiting - by Ibaraki DX</option>
+			<option value='-1'>Play a random one</option>
+			<option value='0'>waiting - by Ibaraki DX</option>
+			<option value='1'>Break the ice - by Fresh</option>
 		</select><br>
-		we only have one music for now and idk what im doing<br>
 		</div>
 		<br>
 		<div>
@@ -78,13 +80,20 @@
 		</select><br>
 		</div>
 		<br>
+		<div>
+		<p>Holding enter auto clicks the button:</p> <br>
+		<select id="autoClick">
+			<option value="false">No need for auto clicker</option>
+			<option value="true">Speedrun time</option>
+		</select><br>
+		</div>
 		<br>
 		<div>
 		<p>Copy your idle save:</p><br>
 		<input type='text' id='saveCopy'></input>
 		</div><br>
 		<div>
-		<p>Load an idle save:</p><br>
+		<p>Load an idle save (commands wont make the confirmation pop up):</p><br>
 		<input type='text' id='saveLoad'></input><button onClick='loadIdleSave()'>Load</button>
 		</div><br>
 		<br>
@@ -94,6 +103,7 @@
 		<div id="wipeIdleData" style="display:none"></div>
 		
 <script src="../code/universal.js" type="text/javascript"></script>
+<script src="../code/trophies.js" type="text/javascript"></script>
 		<script>
 			const themeSelect = document.getElementById("themeSelect");
 			const currentTheme = localStorage.getItem("theme") || "metal";
@@ -133,6 +143,12 @@ document.getElementById('rainbowSelect').addEventListener("change", function(e) 
 	localStorage.setItem("rainbowSpeed", e.currentTarget.value)
 })
 		
+document.getElementById('jukeboxPlaylist').value = localStorage.getItem('music') || '0'
+
+document.getElementById('jukeboxPlaylist').addEventListener("change", function(e) {
+	localStorage.setItem("music", e.currentTarget.value)
+})
+		
 		var confirmationText = "restart";
 		
 		function confirmWipeIdle(){
@@ -155,7 +171,7 @@ document.getElementById('rainbowSelect').addEventListener("change", function(e) 
 		}
 		function idleGone(){
 			if(document.getElementById("textWipe").value == confirmationText){
-			var idleData ={
+var idleData ={
 	points: 0,
 	baseClick:0,
 	percentClick:0,
@@ -169,24 +185,21 @@ document.getElementById('rainbowSelect').addEventListener("change", function(e) 
 	basicDiscountAmt:0,
 	idleKing:0,
 	idleKingBonus:0.0,
-	buyMax:false,
 	thisAscension:0,
 	fastAscension:0,
 	numOfAscensions:0,
 	firstTimeAll:Date.now(),
 	lastTick:Date.now(),
 	lastClick:Date.now(),
-	sell:false,
 	coolerPoints:0,
 	totalCool:0,
 	haltProduction:false,
 	haltClicks:false,
 	omega:false,
 	legacy:0,
-	highestPPS:0,
+	highestPPS:1000,
 	equipedReference:"none",
 	chanceMakerTimer:0,
-	lastChanceMakerActivation:0,
 	portalCycleWorld:"normal",
 	extraSynergy:0,
 	starterPack:0,
@@ -196,7 +209,11 @@ document.getElementById('rainbowSelect').addEventListener("change", function(e) 
 	chosenKing:0,
 	memory:0,
 	hasSold:false,
-	onAscension:false
+	inAscension:false,
+	pointsThisAscension:0,
+	referenceCondenser:0,
+	clickKing:0,
+	symmetry:false
 }
 				localStorage.setItem("idleSave", JSON.stringify(idleData))
 				location.reload()
@@ -220,10 +237,23 @@ document.getElementById('rainbowSelect').addEventListener("change", function(e) 
 	document.getElementById('saveCopy').value = encrypt(localStorage.getItem('idleSave'),'funKiller()')
 	
 	function loadIdleSave(){
+		let loadValue = document.getElementById('saveLoad').value
+		if(loadValue == 'wwssadad ') {secretTrophies.konamiCode = true} else
+		if(loadValue == 'an idle save') {secretTrophies.literally = true} else
 		if(sure()){
-			localStorage.setItem('idleSave', decrypt(document.getElementById('saveLoad').value,'funKiller()'))
+			localStorage.setItem('idleSave', decrypt(loadValue,'funKiller()'))
 		}
+		document.getElementById('saveLoad').value = ''
+		saveAchievements()
 	}
+	
+		
+document.getElementById('autoClick').value = localStorage.getItem('autoClicker') || false
+
+document.getElementById('autoClick').addEventListener("change", function(e) {
+	localStorage.setItem("autoClicker", e.currentTarget.value)
+})
+
 		</script>
 		</div>
 		<div id="footer" class="animated">

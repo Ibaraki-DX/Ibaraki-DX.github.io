@@ -117,6 +117,14 @@
 		<div class="cell hoverText" id="moreClick02"></div>
 	</div>
 	<div>
+		<div class="head hasHover">
+			Perfect speed
+		</div>
+		<div class="cell hoverText" id="perfectSpeed">
+			Click at 10cps or faster (or use auto clicker)
+		</div>
+	</div>
+	<div>
 		<div class="head hasHover" onmouseover="idle('King', '01')">
 			A new reign
 		</div>
@@ -138,7 +146,25 @@
 		<div class="head hasHover">
 			Beyond
 		</div>
-		<div class="cell hoverText" id="beyond">Ascend once</div>
+		<div class="cell hoverText" id="beyond">Ascend for the first time</div>
+	</div>
+	<div>
+		<div class="head hasHover">
+			Expand, expand, expand
+		</div>
+		<div class="cell hoverText" id="expand">Get the kingdom expansion upgrade</div>
+	</div>
+	<div>
+		<div class="head hasHover">
+			Biggering
+		</div>
+		<div class="cell hoverText" id="biggering">Get the chosen one upgrade</div>
+	</div>
+	<div>
+		<div class="head hasHover">
+			Never forget
+		</div>
+		<div class="cell hoverText" id="neverForget">Get the residual memory upgrade</div>
 	</div>
 	<div>
 		<div class="head hasHover">
@@ -148,12 +174,28 @@
 	</div>
 	<div>
 		<div class="head hasHover">
-			Never forget
+			Goodbye softcaps, hello softcaps
 		</div>
-		<div class="cell hoverText" id="neverForget">Get 1 residual memory upgrade</div>
+		<div class="cell hoverText" id="omegacap">Get the omega overcharge</div>
 	</div>
-	<div></div>
-	<div></div>
+	<div>
+		<div class="head hasHover">
+			No bounds
+		</div>
+		<div class="cell hoverText" id="noBounds">Overcharge an ascension upgrade completely</div>
+	</div>
+	<div>
+		<div class="head hasHover">
+			Piercing the skies
+		</div>
+		<div class="cell hoverText" id="pierceTheSkies">Overcharge the convergent legacy</div>
+	</div>
+	<div>
+		<div class="head hasHover">
+			Get *softcapped* dummy
+		</div>
+		<div class="cell hoverText" id="hitSoftcap">Make anything stop giving bonus for getting too strong</div>
+	</div>
 	<div></div>
 	<div></div>
 	<div></div>
@@ -196,7 +238,7 @@
 		</div>
 		<div class="cell hoverText" id="antimatter">
 		See news about antimatter<br>
-		Unlockable is not finished, sorry
+		Unlocks Lai oversimplification on the condenser
 		</div>
 	</div>
 	<div>
@@ -205,7 +247,7 @@
 		</div>
 		<div class="cell hoverText" id="chanceMaker">
 		See news about the cookie entity <br>
-		Unlockable is not finished, sorry
+		Unlocks the Chancemaker on the condenser
 		</div>
 	</div>
 	<div>
@@ -213,8 +255,8 @@
 			Portal mayhem
 		</div>
 		<div class="cell hoverText" id="portalCycle">
-		See news about someone coming from a portal <br>
-		Unlockable is not finished, sorry
+		See news about someone coming from a portal /*<br>
+		Unlocks the Portalcycle on the condenser*/
 		</div>
 	</div>
 	<div>
@@ -223,7 +265,7 @@
 		</div>
 		<div class="cell hoverText" id='candyBox'>
 		See news about someone training too much <br>
-		Unlockable is not finished, sorry
+		Unlocks the candy box on the condenser
 		</div>
 	</div>
 	<div></div>
@@ -245,7 +287,7 @@
 		</div>
 		<div class="cell hoverText" id="singularity"></div>
 	</div>
-	<div>
+	<!--<div>
 		<div class="head hasHover" onmouseover="secret('noclick')">
 			Neverclick
 		</div>
@@ -256,7 +298,7 @@
 			Anti-Idle
 		</div>
 		<div class="cell hoverText" id="click"></div>
-	</div>
+	</div>-->
 	<div>
 		<div class="head hasHover" onmouseover="secret('insane')">
 			Insanity
@@ -270,6 +312,26 @@
 		<div class="cell hoverText" id="insisting"></div>
 	</div>
 	<div>
+		<div class="head hasHover" onmouseover="secret('konamiCode')">
+			That classic code
+		</div>
+		<div class="cell hoverText" id="konamiCode"></div>
+	</div>
+	<div>
+		<div class="head hasHover">
+			As said
+		</div>
+		<div class="cell hoverText" id="literally">
+			Load an idle save
+		</div>
+	</div>
+	<div>
+		<div class="head hasHover" onmouseover="('')">
+			Surrender to the softcaps now
+		</div>
+		<div class="cell hoverText" id="surrenderToCaps">Try overcharging the omega overcharge</div>
+	</div>
+	<div>
 		<div class="head hasHover">
 			Fun killer
 		</div>
@@ -279,13 +341,12 @@
 	<div></div>
 	<div></div>
 	<div></div>
-	<div></div>
 </div>
 
 <!--
 <div id="Trophies" class="tabcontent">
 	<div>
-		<div class="head hasHover" onmouseover="()">
+		<div class="head hasHover" onmouseover="('')">
 			
 		</div>
 		<div class="cell hoverText" id=""></div>
@@ -309,15 +370,21 @@ if(!newsTrophies.multiverse){
 	selfDestruct(document.getElementById('candyBox').parentElement)
 }
 if(!secretTrophies.funKiller) selfDestruct(document.getElementById('funky').parentElement)
+if(!secretTrophies.surrenderToCaps) selfDestruct(document.getElementById('surrenderToCaps').parentElement)
 if(!idleTrophies.beyond){
 	selfDestruct(document.getElementById('beyond').parentElement)
-	/*selfDestruct(document.getElementById('limitBreak').parentElement)
-	selfDestruct(document.getElementById('neverForget').parentElement)*/
+	selfDestruct(document.getElementById('limitBreak').parentElement)
+	selfDestruct(document.getElementById('neverForget').parentElement)
+	selfDestruct(document.getElementById('biggering').parentElement)
+	selfDestruct(document.getElementById('expand').parentElement)
+	if(!idleTrophies.omegacap){
+		selfDestruct(document.getElementById('omegacap').parentElement)
+		selfDestruct(document.getElementById('noBounds').parentElement)
+		selfDestruct(document.getElementById('pierceTheSkies').parentElement)
+	}
 }
-selfDestruct(document.getElementById('noclick').parentElement)
-selfDestruct(document.getElementById('click').parentElement)
-selfDestruct(document.getElementById('neverForget').parentElement)
-selfDestruct(document.getElementById('limitBreak').parentElement)
+/*selfDestruct(document.getElementById('noclick').parentElement)
+selfDestruct(document.getElementById('click').parentElement)*/
 </script>
 		</div>
 		<div id="footer" class="animated">

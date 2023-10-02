@@ -425,4 +425,19 @@ p{
 	background-color:#000;
 }
 
-.animated{}
+.candyButton{
+	height:40px;
+	width:30px;
+	padding:0;
+    position: relative;
+}
+
+.candyButton span {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+#idleStats p {
+	padding: 5px
+}

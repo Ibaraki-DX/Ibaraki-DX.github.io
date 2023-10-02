@@ -1,5 +1,6 @@
 const numType = localStorage.getItem("numType") || "long";
 const rainbowSpeed = localStorage.getItem("rainbowSpeed") || 5000;
+const autoClicker = localStorage.getItem('autoClicker') || false
 const isIndex = eval(location.pathname.substring(location.pathname.lastIndexOf("/") + 1) == "index.html"||location.pathname.substring(location.pathname.lastIndexOf("/") + 1) == "")
 if(isIndex) {path = ""} else  path = "../"
 function initThemeSelector(){
@@ -123,9 +124,12 @@ function factorial(num){
 	else return num*factorial(num-1)
 }
 
+function invert(x){return 1/x}
+
 function format(number) {
 	if(number<0) return "-"+format(-number)
-	if(!isFinite(number)) return Infinity
+	if(!isFinite(number)) return '&infin;'
+	if(isNaN(number)) return '?'
 	let exponent = floor(log(10, number))
 	let mantissa = number/10**exponent
 	if (exponent < 3&&numType!="base2") return round(number)
@@ -148,11 +152,11 @@ function format(number) {
 		return (number >>> (exponent-7)).toString(2).replace("1","1.") +"b"+(exponent+buffer)
 	}
 	
-	order = floor(exponent/3)
-		numString = "";
+	let order = floor(exponent/3)
+		let numString = "";
 	
 	if (numType == "letter"){
-		letter = ["","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+		let letter = ["","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
 		do{
 			numString = letter[order%26] + numString
 			order=floor((order-order%26)/26)
@@ -163,8 +167,8 @@ function format(number) {
 	if (numType == "compact"){
 		order--
 		if (order == 0) return fixed(2, (10**(exponent%3)*mantissa)) + " K"
-		ten = ["","Dc","Vg","Tri","Qua","Qui","Sex","Spt","Oct","Non"]
-		cent = ["","Cen","Du","Tre","Quad","Quin","Sexcen","Septin","Octin","Nongen"]
+		let ten = ["","Dc","Vg","Tri","Qua","Qui","Sex","Spt","Oct","Non"]
+		let cent = ["","Cen","Du","Tre","Quad","Quin","Sexcen","Septin","Octin","Nongen"]
 		do{
 			if(order>3){uni = ["","Un","Duo","Tr","Qa","Qi","Sx","Sp","Oc","No"]} else {uni = ["","M","B","T","Qa","Qi","Sx","Sp","Oc","No"]}
 			numString = "-"+uni[order%10]+ten[floor(order/10)%10]+cent[floor(order/100)%10]+numString
@@ -174,16 +178,15 @@ function format(number) {
 	}
 	
 	if(numType == "normal"){
-		if (order <= 10){
-			order--
-			basicName = ["Thousand","Million","Billion","Trillion","Quadrillion","Quintillion","Sextillion","Septillion","Octillion","Nonillion"]
+		order--
+		if (order <= 9){
+			let basicName = ["Thousand","Million","Billion","Trillion","Quadrillion","Quintillion","Sextillion","Septillion","Octillion","Nonillion"]
 			return engiMantissa(exponent,mantissa) + " " + basicName[order%10]
 		} else{
-		order--
-		ten = ["","Deci","Viginti","Triginti","Quadraginti","Quiquaginti","Sexaginti","Septaginti","Octaginti","Nonaginti"]
-		cent = ["","Centi","Duocenti","Trecenti","Quadringenti","Quingenti","Sexacenti","Septingenti","Octingenti","Nongenti"]
+		let ten = ["","Deci","Viginti","Triginti","Quadraginti","Quiquaginti","Sexaginti","Septaginti","Octaginti","Nonaginti"]
+		let cent = ["","Centi","Duocenti","Trecenti","Quadringenti","Quingenti","Sexacenti","Septingenti","Octingenti","Nongenti"]
 		do{
-			if(order%1000>=0&&order%1000<=9) {uni = ["","Mi","Dumi","Trimi","Quadrimi","Quinmi","Sexmi","Septimi","Octimi","Nonimi"]} else {uni = ["","Un","Duo","Tres","Qua","Quin","Sex","Sep","Octi","Noni"]}
+			if(order%1000>=0&&order%1000<=9) {uni = ["","Mi","Dumi","Trimi","Quadrimi","Quinmi","Sexmi","Septimi","Octimi","Nonimi"]} else {uni = ["","Un","Duo","Tres","Quattor","Quin","Sex","Sep","Octi","Noni"]}
 			if(floor(order/10)%10==0&&floor(order/100)%10==0) {uni = ["","Mi","Bi","Tri","Quadri","Quinti","Sexti","Septi","Octi","Noni"]}
 			if(order%1000==0) {uni[0] = "Ni"} else {uni[0] = ""}
 			numString = uni[order%10]+ten[floor(order/10)%10]+cent[floor(order/100)%10]+"lli"+numString
@@ -193,20 +196,108 @@ function format(number) {
 		}
 	
 	}
+	if (numType == "letter++"){
+		let letter = ["","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+		do{
+			numString = letter[order%26] + numString
+			order=floor((order-order%26)/26)
+		}while(order>=1)
+		let nDigit = numString.charAt(numString.length-1)
+		if(nDigit=="A")
+			numString+='bcillion'
+		else
+		if(nDigit=="B")
+			numString+='azillion'
+		else
+		if(nDigit=="C")
+			numString+='reatillion'
+		else
+		if(nDigit=="D")
+			numString+='imensillion'
+		else
+		if(nDigit=="E")
+			numString+='zillion'
+		else
+		if(nDigit=="F")
+			numString+='illion'
+		else
+		if(nDigit=="G")
+			numString+='azillion'
+		else
+		if(nDigit=="H")
+			numString+='yllion'
+		else
+		if(nDigit=="I")
+			numString+='nventillion'
+		else
+		if(nDigit=="J")
+			numString+='illion'
+		else
+		if(nDigit=="K")
+			numString+='rillion'
+		else
+		if(nDigit=="L")
+			numString+='illion'
+		else
+		if(nDigit=="M")
+			numString+='irillion'
+		else
+		if(nDigit=="N")
+			numString+='eonillion'
+		else
+		if(nDigit=="O")
+			numString+='mnillion'
+		else
+		if(nDigit=="P")
+			numString+='erfectillion'
+		else
+		if(nDigit=="Q")
+			numString+='uantillion'
+		else
+		if(nDigit=="R")
+			numString+='oundillion'
+		else
+		if(nDigit=="S")
+			numString+='illyon'
+		else
+		if(nDigit=="T")
+			numString+='errarillion'
+		else
+		if(nDigit=="U")
+			numString+='nobtillion'
+		else
+		if(nDigit=="V")
+			numString+='eterillion'
+		else
+		if(nDigit=="W")
+			numString+='iwillion'
+		else
+		if(nDigit=="X")
+			numString+='illion'
+		else
+		if(nDigit=="Y")
+			numString+='illion'
+		else
+		if(nDigit=="Z")
+			numString+='illion'
+		return engiMantissa(exponent, mantissa) + ' ' + numString
+	}
 }
 
 
-const playMusic = localStorage.getItem("music") || 0;
+const playMusic = localStorage.getItem("music") || -1;
 let musicVolume = localStorage.getItem("volume") || 1;
-var jukebox = ["waiting"]
+let jukebox = ["waiting",'break the ice']
 
 
 function musicPlayer(){
-	if (playMusic != "random"){
-		document.getElementById("jukebox").innerHTML = `<audio loop autoplay id="mp3Player"> <source src="${path}design/music/${jukebox[playMusic]}.mp3"></audio><button onClick="playnpause()" class="long" id="playnpause">Pause</button>`
-		document.getElementById("textJukebox").innerHTML = `Music: ${jukebox[playMusic]}<br><input type="range" id="volume-slider" class="long" min="0" max="10" value="${musicVolume*10}" style="border:0"><br><div id="volumeDisplay"></div>`
-	}		
-	afkMute()
+	let music = playMusic
+	if(music == -1){
+		music = rng(0, jukebox.length-1)
+	}
+	document.getElementById("jukebox").innerHTML = `<audio loop autoplay id="mp3Player"> <source src="${path}design/music/${jukebox[music]}.mp3"></audio><button onClick="playnpause()" class="long" id="playnpause">Pause</button>`
+	document.getElementById("textJukebox").innerHTML = `Music: ${jukebox[music]}<br><input type="range" id="volume-slider" class="long" min="0" max="10" value="${musicVolume*10}" style="border:0"><br><div id="volumeDisplay"></div>`
+	
 	document.getElementById("volumeDisplay").innerHTML = "Volume: " + musicVolume*10
 	document.getElementById("mp3Player").volume = musicVolume
 	document.getElementById('volume-slider').addEventListener("change", function(e) {
@@ -226,16 +317,6 @@ function playnpause(){
 		document.getElementById("mp3Player").play()
 		document.getElementById("playnpause").innerHTML = "Pause"
 	}
-}
-
-function afkMute(){
-addEventListener("visibilitychange", (event) => {
-if (document.visibilityState === "visible"&&localStorage.getItem("volume")>0&&document.getElementById('playnpause').innerHTML!='Play') {
-    document.getElementById("mp3Player").play();
-  } else {
-    document.getElementById("mp3Player").pause();
-  }
-});	
 }
 
 function rainbowColor(){
@@ -418,3 +499,22 @@ function sure(){
 	return confirm('Are you sure?\nPress "OK" to proceed')
 }
 
+function test(){
+	if(location.pathname.substring(location.pathname.lastIndexOf('/')+1) != 'notsecret.html') return null
+	jpCharacter = ['あ','い','う','え','お','か','き','く','け','こ','きゃ','きゅ','きょ','さ','し','す','せ','そ','しゃ','しゅ','しょ','た','ち','つ','て','と','ちゃ','ちゅ','ちょ','な','に','ぬ','ね','の','にゃ','にゅ','にょ','は','ひ','ふ','へ','ほ','ひゃ','ひゅ','ひょ','ま','み','む','め','も','みゃ','みゅ','みょ','や','ゆ','よ','ら','り','る','れ','ろ','りゃ','りゅ','りょ','わ','を','が','ぎ','ぐ','げ','ご','ぎゃ','ぎゅ','ぎょ','ざ','じ','ず','ぜ','ぞ','じゃ','じゅ','じょ','だ','ぢ','づ','で','ど','ぢゃ','ぢゅ','ぢょ','ば','び','ぶ','べ','ぼ','びゃ','びゅ','びょ','ぱ','ぴ','ぷ','ぺ','ぽ','ぴゃ','ぴゅ','ぴょ']
+	ltCharacter = ['a','i','u','e','o','ka','ki','ku','ke','ko','kya','kyu','kyo','sa','shi','su','se','so','sha','shu','sho','ta','chi','tsu','te','to','cha','chu','cho','na','ni','nu','no','ne','nya','nyu','nyo','ha','hi','fu','he','ho','hya','hyu','hyo','ma','mi','mu','me','mo','mya','myu','myo','ya','yu','yo','ra','ri','ru','re','ro','rya','ryu','ryo','wa','wo','ga','gi','gu','ge','go','gya','gyu','gyo','za','ji','zu','ze','zo','ja','ju','jo','da','dji','dzu','de','do','dya','dyu','dyo','ba','bi','bu','be','bo','bya','byu','byo','pa','pi','pu','pe','po','pya','pyu','pyo']
+	let digit = rng(0, jpCharacter.length-1)
+	console.log(jpCharacter[digit])
+	const input = prompt('Whats is this character sent on the console')
+	return ('You said '+input+', it was '+ltCharacter[digit])
+}
+
+function timeConvert(ms){
+	let week = floor(ms/(7*86400000))
+	let day = floor((ms%(7*86400000))/86400000)
+	let hr = floor((ms%86400000)/3600000)
+	let min = floor((ms%3600000)/60000)
+	let s = floor((ms%60000)/1000)
+	ms = ms%1000
+	return [ms,s,min,hr,day,week]
+}

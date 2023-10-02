@@ -19,10 +19,15 @@ var idleTrophies = {
 	idleKing03:false,
 	//evenBeyond:false,
 	beyond:false,
-	//noBounds:false,
+	noBounds:false,
 	limitBreak:false,
-	//pierceTheSkies:false,
-	neverForget:false
+	pierceTheSkies:false,
+	neverForget:false,
+	perfectSpeed:false,
+	expand:false,
+	biggering:false,
+	omegacap:false,
+	hitSoftcap:false
 }
 
 var reqTrophies = {
@@ -62,7 +67,10 @@ var secretTrophies = {
 	singularity:false,
 	insisting:false,
 	funKiller:false,
-	insistingNum:0
+	insistingNum:0,
+	literally:false,
+	konamiCode:false,
+	surrenderToCaps:false
 }
 
 function trophyCount(type){
@@ -176,9 +184,9 @@ function completedAchievements(){
 	if(idleTrophies.idleKing01) completed('idleKing01');
 	if(idleTrophies.idleKing02) completed('idleKing02');
 	if(idleTrophies.idleKing03) completed('idleKing03');
-	if(secretTrophies.luckyDay) completed('lucky');
+	if(secretTrophies.luckyDay) completed('lucky');/*
 	if(secretTrophies.neverClick) completed('noclick');
-	if(secretTrophies.everClick) completed('click');
+	if(secretTrophies.everClick) completed('click');*/
 	if(secretTrophies.insane) completed('insane');
 	if(secretTrophies.singularity) completed('singularity');
 	if(secretTrophies.insisting) completed('insisting');
@@ -188,6 +196,17 @@ function completedAchievements(){
 	if(idleTrophies.neverForget) completed('neverForget');
 	if(idleTrophies.limitBreak) completed('limitBreak');
 	if(newsTrophies.candyBox) completed('candyBox');
+	if(secretTrophies.literally) completed('literally');
+	if(secretTrophies.konamiCode) completed('konamiCode');
+	if(idleTrophies.perfectSpeed) completed('perfectSpeed');
+	if(secretTrophies.surrenderToCaps) completed('surrenderToCaps');
+	if(idleTrophies.noBounds) completed('noBounds');
+	if(idleTrophies.pierceTheSkies) completed('pierceTheSkies');
+	if(idleTrophies.expand) completed('expand');
+	if(idleTrophies.biggering) completed('biggering');
+	if(idleTrophies.omegacap) completed('omegacap');
+	if(idleTrophies.hitSoftcap) completed('hitSoftcap');
+	
 	//if(Trophies.) completed('');
 }
 
@@ -230,7 +249,7 @@ function secret(id){
 		if(secretTrophies.luckyDay){description.innerHTML = "You had a 1/1000000 chance to get this every second"} else {description.innerHTML="Wait a bit, at any moment you will get"}	
 	}
 	if(id=="singularity"){
-		if(secretTrophies.singularity){description.innerHTML = "Reach infinity"}else{description.innerHTML="Make the game reach its breaking point"}
+		if(secretTrophies.singularity){description.innerHTML = "Reach infinite points"}else{description.innerHTML="Make the game reach its breaking point"}
 	}
 	/*if(id=="noclick"){
 		if(secretTrophies.neverClick){description.innerHTML = "Beat the pure challenge without click upgrades"} else {description.innerHTML = "Wait for when you find purity and you will know what to do"}
@@ -252,6 +271,13 @@ function secret(id){
 			description.innerHTML = moveAwayMsg[rng(0,moveAwayMsg.length-1)]
 		}
 		saveAchievements();
+	}
+	if(id=='konamiCode'){
+		if(secretTrophies.konamiCode){
+			description.innerHTML = 'Load "wwssadad "'
+		} else {
+			description.innerHTML = 'Load that special code using wasd like "******** "'
+		}
 	}
 }
 

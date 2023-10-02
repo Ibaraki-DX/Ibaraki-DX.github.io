@@ -132,10 +132,32 @@
 	</div>
 	<div></div>
 	<div>
+		<div id='referenceCondenserTitle' class="head hasHover" onmouseover="ascensionMsg('referenceCondenser')" onclick="buyAscensionUpgrade('referenceCondenser')">
+			The reference condenser<br> 10000 cooler points
+		</div>
+		<div class="cell hoverText" id="referenceCondenser">
+			Currently: <div id='referenceCondenserCurrent'></div><br>
+			Upgrade: <div id='referenceCondenserUpgrade'></div>
+		</div>
+		<div class="cell" style="background:grey;padding:0" id="referenceCondenserPB1"><div class='progressBar' id='referenceCondenserPB2'></div></div>
+	</div>
+	<div>
+		<div id='omegaTitle' class="head hasHover" onmouseover="ascensionMsg('omega')" onclick="buyAscensionUpgrade('omega')">
+			Omega overcharge<br> 1000000000 cooler points
+		</div>
+		<div class="cell hoverText" id="omega">
+			Currently: <div id='omegaCurrent'></div><br>
+			Upgrade: <div id='omegaUpgrade'></div>
+		</div>
+		<div class="cell" style="background:grey;padding:0" id="omegaPB1"><div class='progressBar' id='omegaPB2'></div></div>
+	</div>
+	<div></div>
+	<div></div>
+	<div>
 		<div class='head' onclick="unprestige()">
 			Get out of here<br>FREE!!1!
 		</div>
-		<div class="cell" style="background:green;padding:0;color:#000;text-align:center;">not counting / &infin;</div>
+		<div class="cell" id='leaveAscension' style="background:green;padding:0;color:#000;text-align:center;">not counting / &infin;</div>
 	</div>
 	<!--
 	<div>
@@ -152,13 +174,30 @@
 </div>
 </div>
 <div id="main" class="animated">
-<div id="idleTab" class="tabcontent">
-	<button id="close" class="long large" onclick="this.parentElement.style.display='none'">Close</button>
+<div id='laiPlayground' class='tabcontent select' style='background:#000;color:#fff;border-bottom:3px solid var(--detail)'>
+	<div class='paddingLeft long'>
+		<p id="darkMatterCounter", class="large animated">You have 0 dark matter</p> <br><br>
+		<p id="dpsCounter" class="animated"></p><br>
+		<p id='singularityCounter' class='animated'></p><br>
+		<p id="universalSpeedometer" class="animated"></p><br><br>
+		<div class='tooltip' style='width:20vw;display:inline-block'>
+			<button id='buySingularity' onclick='buySingularity()' style='background:#000' class="long">Condense space<br>11 dark matter</button><br><br>
+			<span class='tooltipText'>Resets dark matter and doubles dark matter production permanently</span>
+		</div>
+		<div class='tooltip' style='width:20vw;display:inline-block'>
+			<button id='buyAccel' onclick='buyAccelerator()' style='background:#000' class="long">Accelerate time<br>100 dark matter</button><br><br>
+			<span class='tooltipText'>Increases the universe speed in 25%</span>
+		</div>
+	</div>
+	<button class="long large" onclick="this.parentElement.style.display='none'" style='background:#000'>Close</button>
+</div>
+<div id="idleTab" class="tabcontent select">
+	<button class="long large" onclick="this.parentElement.style.display='none'">Close</button>
 	<div id="idleStats">		
 	</div>
 </div>
 <div id="basicSection" class="tabcontent">
-	<button id="close" class="large" onclick="this.parentElement.style.display='none'">Close</button>
+	<button class="large" onclick="this.parentElement.style.display='none'">Close</button>
 	<button id="sellButton" onclick="sellMode()">Buy</button>
 	<button id="buyMaxButton" onclick="buyAmount()">1 by 1</button>
 	
@@ -193,21 +232,33 @@
 	</div>
 	
 	<div class='tooltip'>
+	<button id="clickKing" onclick="buySomething('clickKing')" disabled>The Click King - lvl. 0<br>1000 points</button>
+	<div class='tooltipText' id='clickKingTt'>Gives a bonus based on how fast you're clicking, up to 5x at 10 clicks per second</div>
+	</div>
+	
+	<div class='tooltip'>
 	<button id="idleKing" onclick="buySomething('idleKing')" disabled>The Idle King - lvl. 0<br>1000 points</button>
 	<div class='tooltipText' id='idleKingTt'>Gives a bonus to production every second after you stop clicking, up to 50% after 60s</div>
 	</div>
 </div>
 <div class="tab floatRight" id="idleUpgradeSections">
 <button class="large" onclick="openTab('basicSection',false)">Upgrades</button>
+<button id='intoLaiPlayground' class="large" onclick="openTab('laiPlayground',false)">Dark dimension</button>
 <button class="large" onclick="openTab('idleTab',false)">Stats</button>
 <button id="ascensionButton" onclick="prestige()" style="display:none">Ascend</button>
+<button id='chanceMakerButton' onclick='chanceMaker()' style='display:none;height:90px'>Chancemaker</button>
+<div id="candyBox" style='display:none;height:32px;grid-template-columns: repeat(3, minmax(0, 1fr));'>
+	<button class="candyButton" onclick="useCandy(1)"><img src="../design/images/candy1.png" alt="1 minute candy"><span id="candy1">0</span></button>
+	<button class="candyButton" onclick="useCandy(2)"><img src="../design/images/candy2.gif" alt="3 minutes candy"><span id="candy2">0</span></button>
+	<button class="candyButton" onclick="useCandy(3)"><img src="../design/images/candy3.gif" alt="7 minutes candy"><span id="candy3">0</span></button>
+</div>
 <button id='companionBox' onclick='companionBox()' style='height:60px;'>loading...</button>
 </div>
 <div style="padding-left:5px">
 <p id="pointCounter", class="large animated">You have 0 points</p> <br><br>
 <p id="ppsCounter" class="animated"></p><br>
 <p id="clickPower" class="animated">You have 1 click power</p><br><br>
-<button onclick="clickPoints()", class="large animated">Get Points!</button> <br><br>
+<button id='theButton' onclick="clickPoints()", class="large animated">Get Points!</button> <br><br>
 <p id="highscoreDisplay", class="floatLeft noMargin animated">You don't have a highscore :c</p><br>
 <p id="trueHighScore", class="floatLeft noMargin animated"></p>
 </div>
@@ -218,7 +269,7 @@
 <script src="../code/news.js" type="text/javascript"></script>
 		</div>
 		<div id="achievementsDisplay" style="background-color:var(--darkerBack)" class="long"></div>
-		<div id="footer" class="animated">
+		<div id="footer" class="animated select" onmouseover='footerInfo(true)' onmouseout='footerInfo(false)'>
 		Made by Ibaraki DX
 		</div>
 	</div>
@@ -227,6 +278,9 @@
 initThemeSelector()
 if(!secretTrophies.insisting){
 selfDestruct(document.getElementById('companionBox'))
+}
+if(idleData.omega){
+	document.getElementById('leaveAscension').style.background = '#c90'
 }
 
 </script>
