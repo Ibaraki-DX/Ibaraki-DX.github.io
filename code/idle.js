@@ -1016,7 +1016,10 @@ function progressBar(current, name){
 	setAscensionLimit(name)
 
 	if(typeof current==="boolean")
-		current=0;
+		if(current==false) 
+			current=0;
+		else
+			current=1;
 	barPercent.innerHTML = current+"/"+limit
 	if(current<=limit) {
 		barPercent.style.width = current/limit*100 + "%"
