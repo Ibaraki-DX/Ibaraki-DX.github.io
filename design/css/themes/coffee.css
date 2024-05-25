@@ -1,0 +1,10 @@
+:root{
+	--detail: #ffd;
+	--lighterBack: #a86;
+	--darkerBack: #531;
+	--font: #ffd;
+	--buttonBack: #531;
+	--buttonFont: #ffd;
+	--buttonBorder:#ffd;
+	--buttonDisabled: #752;
+}

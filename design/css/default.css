@@ -232,6 +232,8 @@ input[type="range"]{
 #basicSection{
 	width:20%;
 	height:100%;
+	flex-grow:1;
+	overflow: auto;
 	border-left: 3px solid var(--detail);
 	background:var(--darkerBack);
 	color:var(--font);
@@ -304,6 +306,42 @@ p{
 	border-bottom: 3px solid var(--detail);
 	overflow:auto;
 	color:var(--font);
+}
+
+#transcensionSection{
+	background:#360036;
+	flex-grow:1;
+	height:80vh;
+	border-bottom: 3px solid var(--detail);
+	overflow:auto;
+	color:#fff;
+}
+#transcensionSection .head{
+	background:#202;
+	color:#fff;
+	border-color:#fff;
+}
+#transcensionSection .cell{
+	background:#303;
+	color:#fff;
+	border-color:#fff;
+}
+
+#ordealSection{
+	background:#360036;
+	color:#fff;
+	border-bottom: 3px solid var(--detail);
+}
+#ordealSection .head{
+	background:#202;
+	color:#fff;
+	border-color:#fff;
+	height:18vh;
+}
+#ordealSection .cell{
+	background:#303;
+	color:#fff;
+	border-color:#fff;
 }
 
 .corruption{
@@ -440,4 +478,16 @@ p{
 
 #idleStats p {
 	padding: 5px
+}
+
+#inventory {
+	height:5vh;
+	background-color: var(--darkerBack);
+	border-bottom: 3px solid var(--detail);
+	padding:0;
+	grid-gap: 0;
+}
+
+#inventory button {
+	height:5vh;
 }

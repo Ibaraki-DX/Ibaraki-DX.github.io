@@ -1,23 +1,23 @@
 var idleTrophies = {
-	idleHand01:false,
-	idleHand02:false,
-	idleHand03:false,
-	idleProduction01:false,
-	idleProduction02:false,
-	idleProduction03:false,
-	idleClick01:false,
-	idleClick02:false,
-	idleClick03:false,
+	idleP01:false,
+	idleP02:false,
+	idleP03:false,
+	idlePPS01:false,
+	idlePPS02:false,
+	idlePPS03:false,
+	idlePPC01:false,
+	idlePPC02:false,
+	idlePPC03:false,
 	aDayOff:false,
 	old:false,
 	generator01:false,
 	moreClick01:false,
 	generator02:false,
 	moreClick02:false,
-	idleKing01:false,
-	idleKing02:false,
-	idleKing03:false,
-	//evenBeyond:false,
+	king01:false,
+	king02:false,
+	king03:false,
+	evenBeyond:false,
 	beyond:false,
 	noBounds:false,
 	limitBreak:false,
@@ -27,26 +27,36 @@ var idleTrophies = {
 	expand:false,
 	biggering:false,
 	omegacap:false,
-	hitSoftcap:false
+	hitSoftcap:false,
+	ordeal_pure:false,
+	ordeal_unstable:false,
+	ordeal_plain:false,
+	ordeal_noclick:false,
+	ordeal_noidle:false,
+	ordeal_anarchy:false,
+	ordeal_decay:false,
+	transcensionMult:false,
+	lazyKing:false,
+	critKing:false
 }
 
 var reqTrophies = {
-	reqIdleHand01:1000,
-	reqIdleHand02:1000**3,
-	reqIdleHand03:1000**6,
-	reqIdleProduction01:100,
-	reqIdleProduction02:1000**2,
-	reqIdleProduction03:1000**5,
-	reqIdleClick01:25,
-	reqIdleClick02:1000**2/2**3,
-	reqIdleClick03:1000**5/2**6,
+	reqidleP01:1000,
+	reqidleP02:10**9,
+	reqidleP03:10**18,
+	reqidlePPS01:100,
+	reqidlePPS02:10**6,
+	reqidlePPS03:10**15,
+	reqidlePPC01:25,
+	reqidlePPC02:10**6/4,
+	reqidlePPC03:10**15/4,
 	reqGenerator01:50,
 	reqGenerator02:125,
 	reqMoreClick01:25,
 	reqMoreClick02:75,
-	reqIdleKing01:1,
-	reqIdleKing02:5,
-	reqIdleKing03:10
+	reqKing01:1,
+	reqKing02:5,
+	reqKing03:10
 }
 
 var newsTrophies = {
@@ -56,13 +66,12 @@ var newsTrophies = {
 	chanceMaker:false,
 	consolationPrize:false,
 	portalCycle:false,
-	candyBox:false
+	candyBox:false,
+	freeCookie:false
 }
 
 var secretTrophies = {
 	luckyDay:false,
-	//neverClick:false,
-	//everClick:false,
 	insane:false,
 	singularity:false,
 	insisting:false,
@@ -70,8 +79,82 @@ var secretTrophies = {
 	insistingNum:0,
 	literally:false,
 	konamiCode:false,
-	surrenderToCaps:false
+	surrenderToCaps:false,
+	lose:false,
+	antiidle:false,
+	neverclick:false
 }
+
+var idleTD = [
+	['idleP01','Just a warm up',''],
+	['idleP02','Getting somewhere',''],
+	['idleP03','Not enough',''],
+	['idlePPS01','Break time',''],
+	['idlePPS02','Ready to go',''],
+	['idlePPS03','Stand by',''],
+	['idlePPC01','Active person',''],
+	['idlePPC02',"It's also idle, remember?",''],
+	['idlePPC03','The clicker',''],
+	['aDayOff','Touching grass','Be offline for at least 1 day'],
+	['old','An old man','Have 2 weeks of playtime'],
+	['generator01','Production line',''],
+	['moreClick01','Click a ton',''],
+	['generator02','The great factory',''],
+	['moreClick02','Strength in numbers',''],
+	['king01','A new reign',''],
+	['king02','Blooming kingdom',''],
+	['king03','Where are we going, King?',''],
+	['beyond','Beyond','Ascend for the first time'],
+	['evenBeyond','Even further beyond','Transcend for the first time'],
+	['noBounds','No bounds','Overcharge an ascension upgrade completely'],
+	['limitBreak','Limit break','>Maximize an ascension upgrade'],
+	['pierceTheSkies','Piercing the skies','Overcharge the convergent legacy'],
+	['neverForget','Never forget','Get the residual memory upgrade'],
+	['perfectSpeed','Perfect speed','Click at 10cps or faster (or use auto clicker)'],
+	['expand','Expand, expand, expand','Get the kingdom expansion upgrade'],
+	['biggering','Biggering','Get the chosen one upgrade'],
+	['omegacap','Goodbye softcaps, hello softcaps','Get the omega overcharge'],
+	['hitSoftcap','Get *softcapped*, dummy','Make anything stop giving bonus for getting too strong'],
+	['ordeal_pure','Proving I can do it again',''],
+	['ordeal_unstable',"It's fine",''],
+	['ordeal_plain','Not boring enough',''],
+	['ordeal_noclick','But nothing changed...',''],
+	['ordeal_noidle','My finger hurts...',''],
+	['ordeal_anarchy','I kinda missed those upgrades',''],
+	['ordeal_decay','This is not fun',''],
+	['transcensionMult','Hey dev, where is my transcension level?','Buy a cool multiplier upgrade'],
+	['lazyKing','The lazy gets lazier','Autobuy Idle King'],
+	['critKing','Big boy multipliers','Get a critical crit click on the button'],
+	//['','',''],
+	//[id,title,description],
+]
+var newsTD = [
+	['realNews','Trustworthy','Find and click the news that asks to be trusted'],
+	['multiverse','Outside of everything?','See news about a rocket at insane speeds<br>This unlocks all references to outside'],
+	['antimatter','Inversion','See news about antimatter<br>Unlocks Lai oversimplification on the condenser'],
+	['chanceMaker',"Who doesn't like cookies?",'See news about the cookie entity<br>Unlocks the Chancemaker on the condenser'],
+	['consolationPrize','Do you feel consoled yet?','Get the consolation prize'],
+	['portalCycle','Portal mayhem','See news about someone coming from a portal'],
+	['candyBox',"It's all about the gains",'See news about someone training too much<br>Unlocks the candy box on the condenser'],
+	['freeCookie','Free stuff!','Get a free cookie']
+	//['','',''],
+	//[id,title,description],
+]
+var secretTD = [
+	['luckyDay','Lucky day',''],
+	['insane','Insanity',''],
+	['singularity','Singularity',''],
+	['insisting','Stop insisting',''],
+	['funKiller','Fun killer',''],
+	['literally','As said',''],
+	['konamiCode','That classic code',''],
+	['surrenderToCaps','Surrender to the softcaps now',''],
+	['lose','Congratulations, you lose',''],
+	['antiidle','Anti-idle',''],
+	['neverclick','Neverclick','']
+	//['','',''],
+	//[id,title,description],
+]
 
 function trophyCount(type){
 	let x = 0
@@ -119,95 +202,16 @@ function loadAchievements(){
 }
 loadAchievements()
 
-/*var achieve = JSON.parse(localStorage.getItem("idleAchievements"))
-	if (typeof achieve.idleHand01 !== undefined) idleTrophies.idleHand01 = achieve.idleHand01;
-	if (typeof achieve.idleHand02 !== undefined) idleTrophies.idleHand02 = achieve.idleHand02;
-	if (typeof achieve.idleHand03 !== undefined) idleTrophies.idleHand03 = achieve.idleHand03;
-	if (typeof achieve.idleProduction01 !== undefined) idleTrophies.idleProduction01 = achieve.idleProduction01;
-	if (typeof achieve.idleProduction02 !== undefined) idleTrophies.idleProduction02 = achieve.idleProduction02;
-	if (typeof achieve.idleProduction03 !== undefined) idleTrophies.idleProduction03 = achieve.idleProduction03;
-	if (typeof achieve.idleClick01 !== undefined) idleTrophies.idleClick01 = achieve.idleClick01;
-	if (typeof achieve.idleClick02 !== undefined) idleTrophies.idleClick02 = achieve.idleClick02;
-	if (typeof achieve.idleClick03 !== undefined) idleTrophies.idleClick03 = achieve.idleClick03;
-	if (typeof achieve.aDayOff !== undefined) idleTrophies.aDayOff = achieve.aDayOff;
-	if (typeof achieve.old !== undefined) idleTrophies.old = achieve.old;
-	if (typeof achieve.generator01 !== undefined) idleTrophies.generator01 = achieve.generator01;
-	if (typeof achieve.generator02 !== undefined) idleTrophies.generator02 = achieve.generator02;
-	if (typeof achieve.moreClick01 !== undefined) idleTrophies.moreClick01 = achieve.moreClick01;
-	if (typeof achieve.moreClick02 !== undefined) idleTrophies.moreClick02 = achieve.moreClick02;
-	if (typeof achieve.idleKing01 !== undefined) idleTrophies.idleKing01 = achieve.idleKing01;
-	if (typeof achieve.beyond !== undefined) idleTrophies.beyond = achieve.beyond;
-	if (typeof achieve.limitBreak !== undefined) idleTrophies.limitBreak = achieve.limitBreak;
-	if (typeof achieve.neverForget !== undefined) idleTrophies.neverForget = achieve.neverForget;
-	//if (typeof achieve. !== undefined) idleTrophies. = achieve.;
-	
-var achieve = JSON.parse(localStorage.getItem("newsAchievements"))
-	if (typeof achieve.realNews !== undefined) newsTrophies.realNews = achieve.realNews;
-	if (typeof achieve.multiverse !== undefined) newsTrophies.multiverse = achieve.multiverse;
-	if (typeof achieve.antimatter !== undefined) newsTrophies.antimatter = achieve.antimatter;
-	if (typeof achieve.chanceMaker !== undefined) newsTrophies.chanceMaker = achieve.chanceMaker;
-	if (typeof achieve.consolationPrize !== undefined) newsTrophies.consolationPrize = achieve.consolationPrize;
-	if (typeof achieve.portalCycle !== undefined) newsTrophies.portalCycle = achieve.portalCycle;
-	//if (typeof achieve. !== undefined) newsTrophies. = achieve.;
-	
-var achieve = JSON.parse(localStorage.getItem("secretAchievements"))
-	if (typeof achieve.luckyDay !== undefined) secretTrophies.luckyDay = achieve.luckyDay;
-	if (typeof achieve.neverClick !== undefined) secretTrophies.neverClick = achieve.neverClick;
-	if (typeof achieve.everClick !== undefined) secretTrophies.everClick = achieve.everClick;
-	if (typeof achieve.insane !== undefined) secretTrophies.insane = achieve.insane;
-	if (typeof achieve.singularity !== undefined) secretTrophies.singularity = achieve.singularity;
-	if (typeof achieve.insisting !== undefined) secretTrophies.insisting = achieve.insisting;
-	if (typeof achieve.funKiller !== undefined) secretTrophies.funKiller = achieve.funKiller;
-	//if (typeof achieve. !== undefined) secretTrophies. = achieve.;*/
-
 function completedAchievements(){
-	if(idleTrophies.idleHand01) completed('idleP01');
-	if(idleTrophies.idleHand02) completed('idleP02');
-	if(idleTrophies.idleHand03) completed('idleP03');
-	if(idleTrophies.idleProduction01) completed('idlePPS01');
-	if(idleTrophies.idleProduction02) completed('idlePPS02');
-	if(idleTrophies.idleProduction03) completed('idlePPS03');
-	if(idleTrophies.idleClick01) completed('idlePPC01');
-	if(idleTrophies.idleClick02) completed('idlePPC02');
-	if(idleTrophies.idleClick03) completed('idlePPC03');
-	if(newsTrophies.realNews) completed('realNews');
-	if(newsTrophies.multiverse) completed('multiverse');
-	if(newsTrophies.antimatter) completed('antimatter');
-	if(newsTrophies.chanceMaker) completed('chanceMaker');
-	if(idleTrophies.aDayOff) completed('aDayOff');
-	if(idleTrophies.old) completed('old');
-	if(newsTrophies.consolationPrize) completed('consolationPrize');
-	if(idleTrophies.generator01) completed('generator01');
-	if(idleTrophies.generator02) completed('generator02');
-	if(idleTrophies.moreClick01) completed('moreClick01');
-	if(idleTrophies.moreClick02) completed('moreClick02');
-	if(idleTrophies.idleKing01) completed('idleKing01');
-	if(idleTrophies.idleKing02) completed('idleKing02');
-	if(idleTrophies.idleKing03) completed('idleKing03');
-	if(secretTrophies.luckyDay) completed('lucky');/*
-	if(secretTrophies.neverClick) completed('noclick');
-	if(secretTrophies.everClick) completed('click');*/
-	if(secretTrophies.insane) completed('insane');
-	if(secretTrophies.singularity) completed('singularity');
-	if(secretTrophies.insisting) completed('insisting');
-	if(secretTrophies.funKiller) completed('funky');
-	if(newsTrophies.portalCycle) completed('portalCycle');
-	if(idleTrophies.beyond) completed('beyond');
-	if(idleTrophies.neverForget) completed('neverForget');
-	if(idleTrophies.limitBreak) completed('limitBreak');
-	if(newsTrophies.candyBox) completed('candyBox');
-	if(secretTrophies.literally) completed('literally');
-	if(secretTrophies.konamiCode) completed('konamiCode');
-	if(idleTrophies.perfectSpeed) completed('perfectSpeed');
-	if(secretTrophies.surrenderToCaps) completed('surrenderToCaps');
-	if(idleTrophies.noBounds) completed('noBounds');
-	if(idleTrophies.pierceTheSkies) completed('pierceTheSkies');
-	if(idleTrophies.expand) completed('expand');
-	if(idleTrophies.biggering) completed('biggering');
-	if(idleTrophies.omegacap) completed('omegacap');
-	if(idleTrophies.hitSoftcap) completed('hitSoftcap');
-	
-	//if(Trophies.) completed('');
+	Object.entries(idleTrophies).forEach(([key,val]) => {
+		if(val==1&&document.getElementById(key)!==null) completed(key)
+	})
+	Object.entries(newsTrophies).forEach(([key,val]) => {
+		if(val==1&&document.getElementById(key)!==null) completed(key)
+	})
+	Object.entries(secretTrophies).forEach(([key,val]) => {
+		if(val==1&&document.getElementById(key)!==null) completed(key)
+	})
 }
 
 
@@ -215,17 +219,17 @@ function idle(type, id){
 	
 	//points total
 	if(type=="P"){
-		document.getElementById("idleP"+id).innerHTML = "Get " + format(reqTrophies['reqIdleHand'+id]) + " points";
+		document.getElementById("idleP"+id).innerHTML = "Get " + format(reqTrophies['reqidleP'+id]) + " points";
 	}
 	
 	//points per second
 	if(type=="PPS"){
-		document.getElementById("idlePPS"+id).innerHTML = "Get " + format(reqTrophies['reqIdleProduction'+id]) + " points per second";	
+		document.getElementById("idlePPS"+id).innerHTML = "Get " + format(reqTrophies['reqidlePPS'+id]) + " points per second";	
 	}
 
 	//points per click
 	if(type=="PPC"){
-		document.getElementById("idlePPC"+id).innerHTML = "Get " + format(reqTrophies['reqIdleClick'+id]) + " points in a single click (ignoring synergy)";	
+		document.getElementById("idlePPC"+id).innerHTML = "Get " + format(reqTrophies['reqidlePPC'+id]) + " points in a single click (ignoring synergy)";	
 	}
 
 	//more clicks level
@@ -239,24 +243,18 @@ function idle(type, id){
 
 	//idle king level
 	if(type=="King"){
-		document.getElementById("idleKing"+id).innerHTML = "Get to Idle King lv." + format(reqTrophies['reqIdleKing'+id])
+		document.getElementById("king"+id).innerHTML = "Get a King upgrade to lv." + format(reqTrophies['reqKing'+id])
 	}
 }
 
 function secret(id){
 	description = document.getElementById(id)
-	if(id=="lucky"){
+	if(id=="luckyDay"){
 		if(secretTrophies.luckyDay){description.innerHTML = "You had a 1/1000000 chance to get this every second"} else {description.innerHTML="Wait a bit, at any moment you will get"}	
 	}
 	if(id=="singularity"){
-		if(secretTrophies.singularity){description.innerHTML = "Reach infinite points"}else{description.innerHTML="Make the game reach its breaking point"}
+		if(secretTrophies.singularity){description.innerHTML = "Scale to &infin;"}else{description.innerHTML="Make the game reach its breaking point"}
 	}
-	/*if(id=="noclick"){
-		if(secretTrophies.neverClick){description.innerHTML = "Beat the pure challenge without click upgrades"} else {description.innerHTML = "Wait for when you find purity and you will know what to do"}
-	}
-	if(id=="click"){
-		if(secretTrophies.everClick){description.innerHTML = "Beat the pure challenge without generator upgrades"} else {description.innerHTML = "Wait for when you find purity and you will know what to do"}
-	}*/
 	if(id=="insane"){
 		if(secretTrophies.insane){description.innerHTML = "Hold at some point 28 days of your record idle production"} else {description.innerHTML = "For when you forget the game, or for when you know what is this requirement and try to achieve it anyways"}
 	}
@@ -274,9 +272,30 @@ function secret(id){
 	}
 	if(id=='konamiCode'){
 		if(secretTrophies.konamiCode){
-			description.innerHTML = 'Load "wwssadad "'
+			description.innerHTML = 'Load "wwssadad"'
 		} else {
-			description.innerHTML = 'Load that special code using wasd like "******** "'
+			description.innerHTML = 'Load an special 8 digit code'
+		}
+	}
+	if(id=='lose'){
+		if(secretTrophies.lose){
+			description.innerHTML = 'Activate the Work 24/7 and the Forced Vacation ordeals at the same time'
+		} else {
+			description.innerHTML = 'Lock your click and idle production to 0'
+		}
+	}
+	if(id=='antiidle'){
+		if(secretTrophies.antiidle){
+			description.innerHTML = 'Complete the Pure ordeal without pressing the button'
+		} else {
+			description.innerHTML = 'Finish a pure run without stressing your fingers'
+		}
+	}
+	if(id=='neverclick'){
+		if(secretTrophies.antiidle){
+			description.innerHTML = 'Complete the Pure ordeal without buying a generator'
+		} else {
+			description.innerHTML = 'Finish a pure run with only your effort'
 		}
 	}
 }
@@ -301,3 +320,21 @@ function luckyDay(){
 	if(secretTrophies.luckyDay==false) window.setInterval(function(){luckyThrow()},1000)
 }
 luckyDay()
+
+function ordUpd()
+{
+	let ordealData = [
+		['pure','Pure'],
+		['unstable','Unstable'],
+		['plain','Plain'],
+		['noclick','Forced Vacation'],
+		['noidle','Work 24/7'],
+		['anarchy','Anarchy'],
+		['decay','Decaying World']
+		//[id, title],
+	]
+	for([id,title] of ordealData)
+	{
+		document.getElementById('ordeal_'+id).innerHTML = `Complete the ${title} ordeal`
+	}
+}

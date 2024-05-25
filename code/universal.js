@@ -1,6 +1,7 @@
 const numType = localStorage.getItem("numType") || "long";
 const rainbowSpeed = localStorage.getItem("rainbowSpeed") || 5000;
 const autoClicker = localStorage.getItem('autoClicker') || false
+const lg = localStorage.getItem('language') || 0
 const isIndex = eval(location.pathname.substring(location.pathname.lastIndexOf("/") + 1) == "index.html"||location.pathname.substring(location.pathname.lastIndexOf("/") + 1) == "")
 if(isIndex) {path = ""} else  path = "../"
 function initThemeSelector(){
@@ -116,6 +117,7 @@ function sumPATerms(term1, progression, n){
 	return format((2*term1+progression*(n-1))*n/2)
 }
 function sumPGTerms(term1, progression, n){
+	if(n==0) return 0
 	if(progression == 1) return term1
 	return (term1*(progression**n-1))/(progression-1)
 }
@@ -284,11 +286,20 @@ function format(number) {
 	}
 }
 
+function scientific(number){
+	if(number<0) return "-"+scientific(-number)
+	if(!isFinite(number)) return '&infin;'
+	if(isNaN(number)) return '?'
+	let exponent = floor(log(10, number))
+	if (exponent < 3) return round(number)
+	return fixed(2, number/10**exponent) + "e" + exponent
+}
 
 const playMusic = localStorage.getItem("music") || -1;
 let musicVolume = localStorage.getItem("volume") || 1;
-let jukebox = ["waiting",'break the ice']
+let jukebox = ["Placeholder",'Break the ice','Accordions of the Ether','Tranquil Tides']
 
+if(playMusic == -2&&elem('musicSection')!=null) elem('musicSection').style.display = 'none'
 
 function musicPlayer(){
 	let music = playMusic
@@ -296,7 +307,7 @@ function musicPlayer(){
 		music = rng(0, jukebox.length-1)
 	}
 	document.getElementById("jukebox").innerHTML = `<audio loop autoplay id="mp3Player"> <source src="${path}design/music/${jukebox[music]}.mp3"></audio><button onClick="playnpause()" class="long" id="playnpause">Pause</button>`
-	document.getElementById("textJukebox").innerHTML = `Music: ${jukebox[music]}<br><input type="range" id="volume-slider" class="long" min="0" max="10" value="${musicVolume*10}" style="border:0"><br><div id="volumeDisplay"></div>`
+	document.getElementById("textJukebox").innerHTML = `${jukebox[music]}<br><input type="range" id="volume-slider" class="long" min="0" max="10" value="${musicVolume*10}" style="border:0"><br><div id="volumeDisplay"></div>`
 	
 	document.getElementById("volumeDisplay").innerHTML = "Volume: " + musicVolume*10
 	document.getElementById("mp3Player").volume = musicVolume
@@ -426,6 +437,7 @@ function isPrime(x){
 	if(x>=Number.MAX_SAFE_INTEGER){return "this number is too big to be held by this function with accuracy"}
 	if(!Number.isInteger(x)){return "this function can only handle integers"}
 	if(x<4){return "please at least 4"}
+	if(x%2){return false}
 	primeCheck = true
 	primes = primesTo(Math.sqrt(x))
 	i=0
@@ -517,4 +529,71 @@ function timeConvert(ms){
 	let s = floor((ms%60000)/1000)
 	ms = ms%1000
 	return [ms,s,min,hr,day,week]
+}
+
+function lgTxt(id){
+    try {return text[id][meta.lg]} catch {return items[id][meta.lg]}
+}
+
+function tax(start,percentage,fixed,duration){
+	let x = start
+	while(duration>0){
+		x = x*(percentage/100+1)+fixed
+		duration--
+	}
+	return x
+}
+
+function hide(element){
+	element.style.display = 'none'
+}
+
+function elem(id){
+	return document.getElementById(id)
+}
+function elemP(id){
+	return elem(id).parentElement
+}
+
+function b3w(str,mode){
+	let b3 = ['===','==+','==x','=+=','=++','=+x','=x=','=x+','=xx','+==','+=+','+=x','++=','+++','++x','+x=','+x+','+xx','x==','x=+','x=x','x+=','x++','x+x','xx=','xx+','xxx']
+	let b27 = [' ','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+	if(mode){
+		str = str.toUpperCase().split('')
+		for(i=0;i<str.length;i++){
+			let found = false
+			for(j=0;j<27&&!found;j++){
+				if(str[i]==b27[j]){
+					str[i] = b3[j]
+					found = true
+				}
+			}
+		}
+		return str.join(' ')
+	} else 
+	str = str.split(' ')
+	for(i=0;i<str.length;i++){
+		let found = false
+		for(j=0;j<27&&!found;j++){
+			if(str[i]==b3[j]){
+				str[i] = b27[j]
+				found = true
+			}
+		}
+	}
+	return str.join('')
+}
+
+function timeToText(time){
+	let tx = ''
+	if(time[5]>0)
+		tx+= time[5] + " weeks, "
+	if(time[4]>0)
+		tx+= time[4] + " days, "
+	if(time[3]>0)
+		tx+= time[3] + " hours, "
+	if(time[2]>0)
+		tx+= time[2] + " minutes and "
+	tx+= time[1] + " seconds"
+	return tx
 }

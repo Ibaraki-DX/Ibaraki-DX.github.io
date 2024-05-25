@@ -19,82 +19,99 @@
 <div class="container"><div id="matrixBackground" class='matrix'></div><div id="lanterns" class='lights'></div></div>
 		<div id="main" style="padding:5px" class="animated select">
 		<div>
-		<p>Choose a theme:				</p><br>
-		<select id="themeSelect">
-			<option value="metal">Metal</option>
-			<option value="light">Flash Bomb</option>
-			<option value="dark">The Abyss stares back</option>
-			<option value="matrix">Wake up, Neo</option>
-			<option value="bee">B e e</option>
-			<option value="bsod">B.S.O.D.</option>
-			<option value="magik">Magik</option>
-			<option value="corruption">World worm</option>
-			<option value="crimson">Big brain time</option>
-			<option value="calm">Festival</option>
-			<option value="hover">Bad signal</option>
-		</select>
+			<p>Choose a theme:				</p><br>
+			<select id="themeSelect">
+				<option value="metal">Metal</option>
+				<option value="light">Flash Bomb</option>
+				<option value="dark">The Abyss stares back</option>
+				<option value="matrix">Wake up, Neo</option>
+				<option value="bee">B e e</option>
+				<option value="bsod">B.S.O.D.</option>
+				<option value="magik">Magik</option>
+				<option value="corruption">World worm</option>
+				<option value="crimson">Big brain time</option>
+				<option value="calm">Festival</option>
+				<option value="xmas">Ho ho ho</option>
+				<option value="fluid">Liquid</option>
+				<option value="fresh">Fresh</option>
+				<option value="persona">5th persona</option>
+				<option value="radiant">Radiant</option>
+				<option value="purple">Purple</option>
+				<option value="orange">Orange</option>
+				<option value="mint">Minty</option>
+				<option value="coffee">Coffee</option>
+				<option value="forest">The Woods</option>
+				<option value="hover">Bad signal</option>
+			</select>
 		</div>
 		<div id='hoverStyle'>
 		<br>
-		<p>How the hover works:</p><br>
-		<select id='hoverStyleSelect'>
-		<option value='drawing'>Color cycle</option>
-		<option value='random'>Random color</option>
-		</select>
+			<p>How the hover works:</p><br>
+			<select id='hoverStyleSelect'>
+			<option value='drawing'>Color cycle</option>
+			<option value='random'>Random color</option>
+			</select>
 		</div>
 		<br>
 		<div>
-		<p>Choose a number type:		</p><br>
-		<select id="numTypeSelect">
-			<option value="long">Long</option>
-			<option value="scientific">Scientific</option>
-			<option value="engineering">Engineering</option>
-			<option value="base2">Base 2</option>
-			<option value="letter">Letters</option>
-			<option value="letter++">Letters funny dlc</option>
-			<option value="compact">Compacted</option>
-			<option value="normal">Normal</option>
-		</select>
+			<p>Choose a number type:		</p><br>
+			<select id="numTypeSelect">
+				<option value="long">Long</option>
+				<option value="scientific">Scientific</option>
+				<option value="engineering">Engineering</option>
+				<option value="base2">Base 2</option>
+				<option value="letter">Letters</option>
+				<option value="letter++">Letters funny dlc</option>
+				<option value="compact">Compacted</option>
+				<option value="normal">Normal</option>
+			</select>
 		</div>
 		<br>
 		<div>
-		<p>Jukebox playlist:</p><br>
-		<select id="jukeboxPlaylist">
-			<option value='-1'>Play a random one</option>
-			<option value='0'>waiting - by Ibaraki DX</option>
-			<option value='1'>Break the ice - by Fresh</option>
-		</select><br>
+			<p>Jukebox playlist:</p><br>
+			<select id="jukeboxPlaylist">
+				<option value="-2">Do not show the jukebox</option>
+				<option value='-1'>Play a random one</option>
+				<option value='0'>placeholder - by Ibaraki DX</option>
+				<option value='1'>Break the ice - by Fresh</option>
+				<option value="2">Accordions of the Ether - by Fresh</option>
+				<option value="3">Tranquil Tides - by Fresh</option>
+			</select><br>
 		</div>
 		<br>
 		<div>
-		<p>Rainbow effect speed:</p> <br>
-		<select id="rainbowSelect">
-			<option value="50">20 updates per second</option>
-			<option value="100">10 updates per second</option>
-			<option value="200">5 updates per second</option>
-			<option value="250">4 updates per second</option>
-			<option value="500">2 updates per second</option>
-			<option value="1000">1 update per second</option>
-			<option value="2000">1 update every 2 seconds</option>
-			<option value="5000">1 update every 5 seconds</option>
-		</select><br>
+			<p>Rainbow effect speed:</p> <br>
+			<select id="rainbowSelect">
+				<option value="50">20 updates per second</option>
+				<option value="100">10 updates per second</option>
+				<option value="200">5 updates per second</option>
+				<option value="250">4 updates per second</option>
+				<option value="500">2 updates per second</option>
+				<option value="1000">1 update per second</option>
+				<option value="2000">1 update every 2 seconds</option>
+				<option value="5000">1 update every 5 seconds</option>
+				<option value="10000">1 update every 10 seconds</option>
+				<option value="20000">1 update every 20 seconds</option>
+				<option value="30000">1 update every 30 seconds</option>
+				<option value="60000">1 update per minute</option>
+			</select><br>
 		</div>
 		<br>
 		<div>
-		<p>Holding enter auto clicks the button:</p> <br>
-		<select id="autoClick">
-			<option value="false">No need for auto clicker</option>
-			<option value="true">Speedrun time</option>
-		</select><br>
+			<p>Holding enter auto clicks the button:</p> <br>
+			<select id="autoClick">
+				<option value="false">No need for auto clicker</option>
+				<option value="true">Speedrun time</option>
+			</select><br>
 		</div>
 		<br>
-		<div>
-		<p>Copy your idle save:</p><br>
-		<input type='text' id='saveCopy'></input>
+			<div>
+			<p>Copy your idle save:</p><br>
+			<input type='text' id='saveCopy'></input>
 		</div><br>
 		<div>
-		<p>Load an idle save (commands wont make the confirmation pop up):</p><br>
-		<input type='text' id='saveLoad'></input><button onClick='loadIdleSave()'>Load</button>
+			<p>Load an idle save (commands wont make the confirmation pop up):</p><br>
+			<input type='text' id='saveLoad'></input><button onClick='loadIdleSave()'>Load</button>
 		</div><br>
 		<br>
 		<p>Wipe the idle data</p>
@@ -195,12 +212,11 @@ var idleData ={
 	totalCool:0,
 	haltProduction:false,
 	haltClicks:false,
-	omega:false,
+	omega:0,
 	legacy:0,
 	highestPPS:1000,
-	equipedReference:"none",
+	equippedReference:"none",
 	chanceMakerTimer:0,
-	portalCycleWorld:"normal",
 	extraSynergy:0,
 	starterPack:0,
 	comboPack:0,
@@ -213,7 +229,40 @@ var idleData ={
 	pointsThisAscension:0,
 	referenceCondenser:0,
 	clickKing:0,
-	symmetry:false
+	darkMatter:0,
+	singularity:0,
+	lastAscensionPoints:0,
+	candy1:0,
+	candy2:0,
+	candy3:0,
+	laiAccel:0,
+	clicks:0,
+	clicksThisAscension:0,
+	clicksThisTranscension:0,
+	pointsThisTranscension:0,
+	inTranscension:false,
+	thisTranscension:0,
+	fastTranscension:0,
+	numOfTranscensions:0,
+	lastTranscensionPoints:0,
+	theTotalCool:0,
+	coolestPoints:0,
+	coolMult:0,
+	greatOrdeal:0,
+	greatestKing:0,
+	crit:0,
+	critMult:0,
+	critCrit:0,
+	chanceBuy:0,
+	ordeal_pure:false,
+	ordeal_unstable:false,
+	ordeal_plain:false,
+	ordeal_noclick:false,
+	ordeal_noidle:false,
+	ordeal_anarchy:false,
+	ordeal_decay:false,
+	challenged:false,
+	currentObjective:Infinity
 }
 				localStorage.setItem("idleSave", JSON.stringify(idleData))
 				location.reload()
@@ -238,7 +287,7 @@ var idleData ={
 	
 	function loadIdleSave(){
 		let loadValue = document.getElementById('saveLoad').value
-		if(loadValue == 'wwssadad ') {secretTrophies.konamiCode = true} else
+		if(loadValue == 'wwssadad') {secretTrophies.konamiCode = true} else
 		if(loadValue == 'an idle save') {secretTrophies.literally = true} else
 		if(sure()){
 			localStorage.setItem('idleSave', decrypt(loadValue,'funKiller()'))

@@ -18,7 +18,7 @@ newsArray = [
 ["xd - the dev, anytime he sends a message",true,"r13"],
 ["No, don't put a cat on a box with radioactive stuff and explosives",true,"r14"],
 ["News ticker 1, looking at the big numbers 1123581321345589144233377610987",true,"r15"],
-["There was a moment where you couldnt hover upgrades, dark times",true,"r16"],
+["There was a moment where you couldn't hover upgrades, dark times",true,"r16"],
 ["Insert your ad here",true,"r17"],
 ["This news ticker is brought to you by Random Number Generator!",true,"r18"],
 ["Wake up, we miss you",true,"r19"],
@@ -38,14 +38,25 @@ newsArray = [
 ['"99.99% of the quotes and statistics you find online are fake and made up" - Albert Einstein',true,'r32'],
 ['"They keep crediting me quotes I never said" - Sun Tzu',true,'r33'],
 ['If it exists...',true,'r34'],
+["A rumor is spreading that our scientists have help of a outside one that actually knows math",true,'r35'],
+["Don't take these texts seriously, the dev writes them at 2am to distract you",true,'r36'],
+['WASD is superior to arrow keys',true,'r37'],
+['Konami code would never work',true,'r38'],
+["These news aren't even news - The news",true,'r39'],
+[`You currently have ${idleData.cookieCounter} cookies`,true,'r40'],
+[`"I will update the website this month" - the dev before procrastinating for 2 months`,true,'r41'],
+["2 plus 2 is 4 minus 1 thats 3 quick maths",true,'r42'],
+["There are 10 types of people: the ones that understand binary and the ones that don't",true,'r43'],
+['Add new note: remove b from the binary notation and add e back. &#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;&#x2800;Remove last note.',true,'r44'],
+['If this idle game is so good, where is idle game 2?',true,'r45'],
 //clickable
 ["<a href=https://youtu.be/HUtTC9x14mY?t=2 target='_blank'>Click here to not win a prize!</a>",true,"c01"],
 ["<a href=https://youtu.be/dQw4w9WgXcQ target='_blank'>https://youtu.be/dQw4w9WgXcQ</a>",true,"c02"],
-["<a href=# onclick='{newsTrophies.realNews=true; saveAchievements()}'>Click here if you believe in me</a>",!newsTrophies.realNews,"c03"],
-["<a href=# onclick='{newsTrophies.consolationPrize=true; saveAchievements()}'>Here is a consolation prize for you!</a>",!newsTrophies.consolationPrize,"c04"],
+["<a href=# onclick='{newsTrophies.realNews=true; saveAchievements(); this.innerHTML = \"Thanks!\"}'>Click here if you believe in me</a>",true,"c03"],
+["<a href=# onclick='{newsTrophies.consolationPrize=true; saveAchievements(); this.innerHTML = \"You have a nice prize collection\"}'>Here is a consolation prize for you!</a>",true,"c04"],
 ["<a href=https://youtu.be/dQw4w9WgXcQ target='_blank'>COLD SINGLES AWAY FROM YOU!!!1!</a>",true,"c05"],
 ["<a href=https://youtu.be/HUtTC9x14mY?t=2 target='_blank'>Get distracted here</a>",true,"c06"],
-["<a href=# onclick='{newsTrophies.consolationPrize=true; saveAchievements()}'>Click here to win a prize!</a>",!newsTrophies.consolationPrize,"c07"],
+["<a href=# onclick='{newsTrophies.consolationPrize=true; saveAchievements(); this.innerHTML = \"Your prize has been claimed!\"}'>Click here to win a prize!</a>",true,"c07"],
 //trivia
 ['If Marvel had kept the Atlas Comics name, the crossovers with DC could be called AC/DC', true,'t01'],
 ['Gholdengo, the 1000th pokemon, is a surfer made of gold coins, this is a reference to the fact that the creators are surfing in money', true,'t02'],
@@ -57,15 +68,16 @@ newsArray = [
 //news
 ["Breaking news: A rocket was detected flying across our universe at speeds beyond anything our bad scientists can count",true,"n01"],
 ["Breaking news: The dev was found playing another game instead of working on his own, the server moderation is trying to make him stop doing references on the breaking news",true,"n02"],
-["Breaking news: Dev was found coding on notepad++, he is now under search from all visual studio users",true,"n03"],
+["Breaking news: Dev is finally using VSCode after encounter with visual studio users",true,"n03"],
 ["Breaking news: The next update will be relea-",true,"n04"],
 ["Breaking news 2: The Return of The Broken News",true,"n05"],
 ["Breaking news: The dev was found cutting virtual grass, he is probably training to touch real one",true,"n06"],
+["Breaking news: The dev just sent another gif of a cat randomly exploding",true,"n07"],
 //references
 ["Breaking news: The entity known as \"You\" just turned one more idleverse into a cookie production machine, our scientists are now scared of cookies",(newsTrophies.multiverse&&rng(1,3)==3),"rc01"],
 ["Breaking news: Illegal cookie mine was discovered and destroyed - The cookie entity is not pleased, but it is busy cloning itself",(newsTrophies.multiverse&&rng(1,3)==3),"rc02"],
 ["Breaking news: Idleverse made of antimatter somehow surpassed infinity, our bad scientists worry it might overflow",(newsTrophies.multiverse&&rng(1,3)==3),"ra01"],
-["Fixing news: Low levels of antimatter were detected on the news ticker, we aren't working on the issue",(newsTrophies.multiverse&&rng(1,3)==3),"ra02"],
+["Fixing news: Low levels of antimatter weren't detected on the news ticker, we aren't working on the issue",(newsTrophies.multiverse&&rng(1,3)==3),"ra02"],
 ["Breaking news: Random person appeared out of a portal, killed half the city's slime population, and left in another portal a couple hours later",(newsTrophies.multiverse&&rng(1,3)==3),"ri01"],
 ['Breaking news: We found a random person pushing a massive boulder around, we asked why but the only thing the person said was: "Do you have any candy to pass time?"',(newsTrophies.multiverse&&rng(1,3)==3),'rs01'],
 //["",true,""],
@@ -79,23 +91,38 @@ if(typeof idleData != "undefined") newsArray.push(
 ["If that was actual money, you could start an Earth collection",idleData.points>10**18,"i05"],
 ["You're high, bro... WAIT, NOT LIKE THAT",idleData.points>10**21,"i06"]
 )
+if(newsTrophies.consolationPrize){
+	newsArray[findNewsInd('c04')][0] = 'You have a nice prize collection'
+	newsArray[findNewsInd('c07')][0] = 'Your prize has been claimed!'
+}
+if(newsTrophies.realNews){
+	newsArray[findNewsInd('c03')][0] = 'Thanks!'
+}
 }
 var s = document.getElementById('news');
 var scrollTimeouts = [];
 var nextMsgIndex;
-function findNewsID(id){
-	foundID = 'id not found'
-	for(i=0;i<newsArray.length&&foundID=='id not found';i++){
-		if(newsArray[i][2] == id) var foundID = newsArray[i][0]
+function findNewsID(ind){
+	if(ind<newsArray.length) return newsArray[ind][2]
+	else return 'index not found'
+}
+function findNewsText(ind){
+	if(ind<newsArray.length) return newsArray[ind][0]
+	else return 'index not found'
+}
+function findNewsInd(id){
+	foundInd = 'id not found'
+	for(i=0;i<newsArray.length&&foundInd=='id not found';i++){
+		if(newsArray[i][2] == id) var foundInd = i
 	}
-	return foundID
+	return foundInd
 }
 function scrollNextMessage() {
 	updateNewsArray();
 	try {
 		do {nextMsgIndex = Math.floor(Math.random() * newsArray.length)} while (!eval(newsArray[nextMsgIndex][1]))
 	} catch(e) {
-		console.log("news id " + newsArray[nextMsgIndex][2] + "is broken :p")
+		console.log(nextMsgIndex + 'or something before it is broken :p')
 	}
 	
 	//news achievements
@@ -117,6 +144,15 @@ function scrollNextMessage() {
 	}
 	if(!newsTrophies.portalCycle&&newsArray[nextMsgIndex][2].substring(0,2)=="ri") {
 		newsTrophies.portalCycle = true
+		saveAchievements()
+	}
+	if(newsArray[nextMsgIndex][2] == 'i03')
+	{
+		idleData.cookieCounter++
+		if(!newsTrophies.freeCookie) {
+			newsTrophies.freeCookie = true
+			achieveCheck('freeCookie')
+		}
 		saveAchievements()
 	}
   

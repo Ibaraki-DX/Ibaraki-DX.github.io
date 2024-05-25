@@ -1,0 +1,10 @@
+:root{
+	--detail: hsl(45, 100%, 50%);
+	--lighterBack: #ffc;
+	--darkerBack: #ff9;
+	--font: #000;
+	--buttonBack: #ffe;
+	--buttonFont: #000;
+	--buttonBorder:hsl(45, 100%, 50%);
+	--buttonDisabled: #000;
+}

@@ -94,7 +94,7 @@
 	</div>
 	<div>
 		<div class="head hasHover" onmouseover="idle('PPS', '03')">
-			Standy by
+			Stand by
 		</div>
 		<div class="cell hoverText" id="idlePPS03"></div>
 	</div>
@@ -128,19 +128,19 @@
 		<div class="head hasHover" onmouseover="idle('King', '01')">
 			A new reign
 		</div>
-		<div class="cell hoverText" id="idleKing01"></div>
+		<div class="cell hoverText" id="king01"></div>
 	</div>
 	<div>
 		<div class="head hasHover" onmouseover="idle('King', '02')">
 			Blooming kingdom
 		</div>
-		<div class="cell hoverText" id="idleKing02"></div>
+		<div class="cell hoverText" id="king02"></div>
 	</div>
 	<div>
 		<div class="head hasHover" onmouseover="idle('King', '03')">
 			Where are we going, King?
 		</div>
-		<div class="cell hoverText" id="idleKing03"></div>
+		<div class="cell hoverText" id="king03"></div>
 	</div>
 	<div>
 		<div class="head hasHover">
@@ -195,6 +195,72 @@
 			Get *softcapped* dummy
 		</div>
 		<div class="cell hoverText" id="hitSoftcap">Make anything stop giving bonus for getting too strong</div>
+	</div>
+	<div>
+		<div class="head hasHover">
+			Even further beyond
+		</div>
+		<div class="cell hoverText" id="evenBeyond">Transcend for the first time</div>
+	</div>
+	<div>
+		<div class="head hasHover">
+			Hey dev, where is my transcension level?
+		</div>
+		<div class="cell hoverText" id="transcensionMult">Buy a cool multiplier upgrade</div>
+	</div>
+	<div>
+		<div class="head hasHover">
+			Big boy multipliers
+		</div>
+		<div class="cell hoverText" id="critKing">Get a critical crit click on the button</div>
+	</div>
+	<div>
+		<div class="head hasHover">
+			The lazy gets lazier
+		</div>
+		<div class="cell hoverText" id="lazyKing">Autobuy idle king</div>
+	</div>
+	<div>
+		<div class="head hasHover" onmouseover="ordUpd()">
+			Proving I can do it again
+		</div>
+		<div class="cell hoverText" id="ordeal_pure"></div>
+	</div>
+	<div>
+		<div class="head hasHover" onmouseover="ordUpd()">
+			It's fine
+		</div>
+		<div class="cell hoverText" id="ordeal_unstable"></div>
+	</div>
+	<div>
+		<div class="head hasHover" onmouseover="ordUpd()">
+			Not boring enough
+		</div>
+		<div class="cell hoverText" id="ordeal_plain"></div>
+	</div>
+	<div>
+		<div class="head hasHover" onmouseover="ordUpd()">
+			But nothing changed...
+		</div>
+		<div class="cell hoverText" id="ordeal_noclick"></div>
+	</div>
+	<div>
+		<div class="head hasHover" onmouseover="ordUpd()">
+			My finger hurts...
+		</div>
+		<div class="cell hoverText" id="ordeal_noidle"></div>
+	</div>
+	<div>
+		<div class="head hasHover" onmouseover="ordUpd()">
+			I kinda missed those upgrades
+		</div>
+		<div class="cell hoverText" id="ordeal_anarchy"></div>
+	</div>
+	<div>
+		<div class="head hasHover" onmouseover="ordUpd()">
+			This is not fun
+		</div>
+		<div class="cell hoverText" id="ordeal_decay"></div>
 	</div>
 	<div></div>
 	<div></div>
@@ -268,7 +334,14 @@
 		Unlocks the candy box on the condenser
 		</div>
 	</div>
-	<div></div>
+	<div>
+		<div class="head hasHover">
+			Free stuff!
+		</div>
+		<div class="cell hoverText" id="freeCookie">
+			Get a free cookie
+		</div>
+	</div>
 	<div></div>
 	<div></div>
 	<div></div>
@@ -276,10 +349,10 @@
 </div>
 <div id="secretTrophies" class="tabcontent select">
 	<div>
-		<div class="head hasHover" onmouseover="secret('lucky')">
+		<div class="head hasHover" onmouseover="secret('luckyDay')">
 			Lucky day
 		</div>
-		<div class="cell hoverText" id="lucky"></div>
+		<div class="cell hoverText" id="luckyDay"></div>
 	</div>
 	<div>
 		<div class="head hasHover" onmouseover="secret('singularity')">
@@ -287,18 +360,6 @@
 		</div>
 		<div class="cell hoverText" id="singularity"></div>
 	</div>
-	<!--<div>
-		<div class="head hasHover" onmouseover="secret('noclick')">
-			Neverclick
-		</div>
-		<div class="cell hoverText" id="noclick"></div>
-	</div>
-	<div>
-		<div class="head hasHover" onmouseover="secret('click')">
-			Anti-Idle
-		</div>
-		<div class="cell hoverText" id="click"></div>
-	</div>-->
 	<div>
 		<div class="head hasHover" onmouseover="secret('insane')">
 			Insanity
@@ -322,20 +383,26 @@
 			As said
 		</div>
 		<div class="cell hoverText" id="literally">
-			Load an idle save
+			Load "an idle save"
 		</div>
 	</div>
 	<div>
-		<div class="head hasHover" onmouseover="('')">
+		<div class="head hasHover">
 			Surrender to the softcaps now
 		</div>
 		<div class="cell hoverText" id="surrenderToCaps">Try overcharging the omega overcharge</div>
 	</div>
 	<div>
+		<div class="head hasHover" onmouseover="secret('lose')">
+			Congratulations, you lose
+		</div>
+		<div class="cell hoverText" id="lose"></div>
+	</div>
+	<div>
 		<div class="head hasHover">
 			Fun killer
 		</div>
-		<div class="cell hoverText" id="funky">Kill all the fun</div>
+		<div class="cell hoverText" id="funKiller">Kill all the fun</div>
 	</div>
 	<div></div>
 	<div></div>
@@ -364,27 +431,41 @@
 initThemeSelector();
 completedAchievements()
 if(!newsTrophies.multiverse){
-	selfDestruct(document.getElementById('antimatter').parentElement)
-	selfDestruct(document.getElementById('chanceMaker').parentElement)
-	selfDestruct(document.getElementById('portalCycle').parentElement)
-	selfDestruct(document.getElementById('candyBox').parentElement)
+	hide(elemP('antimatter'))
+	hide(elemP('chanceMaker'))
+	hide(elemP('portalCycle'))
+	hide(elemP('candyBox'))
 }
-if(!secretTrophies.funKiller) selfDestruct(document.getElementById('funky').parentElement)
-if(!secretTrophies.surrenderToCaps) selfDestruct(document.getElementById('surrenderToCaps').parentElement)
+if(!secretTrophies.funKiller) hide(elemP('funKiller'))
+if(!secretTrophies.surrenderToCaps) hide(elemP('surrenderToCaps'))
 if(!idleTrophies.beyond){
-	selfDestruct(document.getElementById('beyond').parentElement)
-	selfDestruct(document.getElementById('limitBreak').parentElement)
-	selfDestruct(document.getElementById('neverForget').parentElement)
-	selfDestruct(document.getElementById('biggering').parentElement)
-	selfDestruct(document.getElementById('expand').parentElement)
+	hide(elemP('beyond'))
+	hide(elemP('limitBreak'))
+	hide(elemP('neverForget'))
+	hide(elemP('biggering'))
+	hide(elemP('expand'))
 	if(!idleTrophies.omegacap){
-		selfDestruct(document.getElementById('omegacap').parentElement)
-		selfDestruct(document.getElementById('noBounds').parentElement)
-		selfDestruct(document.getElementById('pierceTheSkies').parentElement)
+		hide(elemP('omegacap'))
+		hide(elemP('noBounds'))
+		hide(elemP('pierceTheSkies'))
+		if(!idleTrophies.evenBeyond){
+			hide(elemP('evenBeyond'))
+			hide(elemP('transcensionMult'))
+			hide(elemP('lazyKing'))
+			hide(elemP('critKing'))
+			hide(elemP('ordeal_pure'))
+			hide(elemP('ordeal_plain'))
+			hide(elemP('ordeal_decay'))
+			hide(elemP('ordeal_noclick'))
+			hide(elemP('ordeal_noidle'))
+			hide(elemP('ordeal_unstable'))
+			hide(elemP('ordeal_anarchy'))
+			hide(elemP('lose'))
+			hide(elemP('antiidle'))
+			hide(elemP('neverclick'))
+		}
 	}
 }
-/*selfDestruct(document.getElementById('noclick').parentElement)
-selfDestruct(document.getElementById('click').parentElement)*/
 </script>
 		</div>
 		<div id="footer" class="animated">

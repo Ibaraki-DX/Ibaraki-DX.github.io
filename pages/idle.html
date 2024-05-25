@@ -155,9 +155,15 @@
 	<div></div>
 	<div>
 		<div class='head' onclick="unprestige()">
-			Get out of here<br>FREE!!1!
+			Get out of here<br>Nothing
 		</div>
-		<div class="cell" id='leaveAscension' style="background:green;padding:0;color:#000;text-align:center;">not counting / &infin;</div>
+		<div class="cell" style="background:#000;color:var(--rainbow);text-align:center;">not counting</div>
+	</div>
+	<div id="ultAsc">
+		<div class="head" onclick="ultraAscension()">
+			Ascend again<br>Everything.
+		</div>
+		<div class="cell" id="ultAscBar" style="background:#000;color:var(--rainbow);text-align:center;">0</div>
 	</div>
 	<!--
 	<div>
@@ -173,23 +179,75 @@
 	-->
 </div>
 </div>
+<div id="transcensionSection" style='display:none;' class='select'>
+<h2 class='paddingleft'>You have transcended</h2>
+<h3 id="transcensionCounter" class='paddingleft'></h3>
+
+
+<div id="upgradeGrid2" class="grid" style='padding:5px;grid-template-columns: repeat(4, minmax(0, 1fr));'>
+
+	<div>
+		<div id='coolMultTitle' class="head hasHover" onmouseover="transcensionMsg('coolMult')" onclick="buyTranscensionUpgrade('coolMult')">
+		</div>
+		<div class="cell hoverText">
+			Currently: <div id='coolMultCurrent'></div><br>
+			Upgrade: <div id='coolMultUpgrade'></div>
+		</div>
+		<div class="cell" style="background:#000;padding:0;color:var(--rainbow);text-align:center;" id="coolMultProgress"></div>
+	</div>
+	<div>
+		<div id='greatestKingTitle' class="head hasHover" onmouseover="transcensionMsg('greatestKing')" onclick="buyTranscensionUpgrade('greatestKing')">
+		</div>
+		<div class="cell hoverText">
+			Both king upgrades unlocks new upgrades
+		</div>
+		<div class="cell" style="background:#000;padding:0;color:var(--rainbow);text-align:center;" id="greatestKingProgress"></div>
+	</div>
+	<div>
+		<div id='greatOrdealTitle' class="head hasHover" onmouseover="transcensionMsg('greatOrdeal')" onclick="buyTranscensionUpgrade('greatOrdeal')">
+		</div>
+		<div class="cell hoverText">
+			Unlocks challenges
+		</div>
+		<div class="cell" style="background:#000;padding:0;color:var(--rainbow);text-align:center;" id="greatOrdealProgress"></div>
+	</div>
+	<div>
+		<div class='head' onclick="untranscend()">
+			Leave
+		</div>
+		<div class="cell" id='leaveAscension' style="background:#000;padding:0;color:var(--rainbow);text-align:center;">not counting</div>
+	</div>
+
+	<!--
+	<div>
+		<div id='Title' class="head hasHover" onmouseover="transcensionMsg('')" onclick="buyTranscensionUpgrade('')">
+		</div>
+		<div class="cell hoverText">
+			Currently: <div id='Current'></div><br>
+			Upgrade: <div id='Upgrade'></div>
+		</div>
+		<div class="cell" style="background:#000;padding:0;color:'var(--rainbow)';text-align:center;" id="Progress"></div>
+	</div>
+	-->
+</div>
+</div>
 <div id="main" class="animated">
 <div id='laiPlayground' class='tabcontent select' style='background:#000;color:#fff;border-bottom:3px solid var(--detail)'>
-	<div class='paddingLeft long'>
-		<p id="darkMatterCounter", class="large animated">You have 0 dark matter</p> <br><br>
-		<p id="dpsCounter" class="animated"></p><br>
-		<p id='singularityCounter' class='animated'></p><br>
-		<p id="universalSpeedometer" class="animated"></p><br><br>
+	<div class='paddingLeft long' style="color:#fff">
+		<p id="darkMatterCounter" class="large animated" style="color:#fff">You have 0 dark matter</p> <br><br>
+		<p id="dpsCounter" class="animated" style="color:#fff"></p><br>
+		<p id='singularityCounter' class='animated' style="color:#fff"></p><br>
+		<p id="universalSpeedometer" class="animated" style="color:#fff"></p><br><br>
 		<div class='tooltip' style='width:20vw;display:inline-block'>
-			<button id='buySingularity' onclick='buySingularity()' style='background:#000' class="long">Condense space<br>11 dark matter</button><br><br>
+			<button id='buySingularity' onclick='buySingularity()' style='background:#000;color:#fff' class="long">Condense space<br>11 dark matter</button><br><br>
 			<span class='tooltipText'>Resets dark matter and doubles dark matter production permanently</span>
 		</div>
 		<div class='tooltip' style='width:20vw;display:inline-block'>
-			<button id='buyAccel' onclick='buyAccelerator()' style='background:#000' class="long">Accelerate time<br>100 dark matter</button><br><br>
+			<button id='buyAccel' onclick='buyAccelerator()' style='background:#000;color:#fff' class="long">Accelerate time<br>100 dark matter</button><br><br>
 			<span class='tooltipText'>Increases the universe speed in 25%</span>
 		</div>
 	</div>
-	<button class="long large" onclick="this.parentElement.style.display='none'" style='background:#000'>Close</button>
+	<button class="long large" onclick="this.parentElement.style.display='none'" style='background:#000;color:#fff'>Close</button>
 </div>
 <div id="idleTab" class="tabcontent select">
 	<button class="long large" onclick="this.parentElement.style.display='none'">Close</button>
@@ -199,7 +257,7 @@
 <div id="basicSection" class="tabcontent">
 	<button class="large" onclick="this.parentElement.style.display='none'">Close</button>
 	<button id="sellButton" onclick="sellMode()">Buy</button>
-	<button id="buyMaxButton" onclick="buyAmount()">1 by 1</button>
+	<button id="buyMaxButton" onclick="buyAmount(1)" oncontextmenu="buyAmount(0)">1 by 1</button>
 	
 	<div class='tooltip'>
 	<button id="moreClick" onclick="buySomething('baseClick')" disabled>More Clicks - lv. 0<br>10 points</button>
@@ -222,11 +280,6 @@
 	</div>
 	
 	<div class='tooltip'>
-	<button id="percentClick" onclick="buySomething('percentClick')" disabled>Synergy - lvl. 0<br>100 points</button>
-	<div class='tooltipText' id='percentClickTt'>Increases click power by 1% of the points per second</div>
-	</div>
-	
-	<div class='tooltip'>
 	<button id="basicDiscount" onclick="buySomething('basicDiscountAmt')" disabled>Discount - lvl. 0<br>100 points</button>
 	<div class='tooltipText'>Gives a 10% discount on most upgrades</div>
 	</div>
@@ -240,9 +293,118 @@
 	<button id="idleKing" onclick="buySomething('idleKing')" disabled>The Idle King - lvl. 0<br>1000 points</button>
 	<div class='tooltipText' id='idleKingTt'>Gives a bonus to production every second after you stop clicking, up to 50% after 60s</div>
 	</div>
+
+	<div class='tooltip'>
+	<button id='chanceBuy' onclick="buySomething('chanceBuy')" disabled>Not an AI - lvl. x<br>x points</button>
+	<div class="tooltipText" id="chanceBuyTt">For every upgrade, gets a 2% chance of buying idle related upgrades</div>
+	</div>
+
+	<div class="tooltip">
+		<button id="crit" onclick="buySomething('crit')" disabled>Critical Clicking - lvl. x<br>x points</button>
+		<div class="tooltipText" id="critTt">Increases the chance of critting on button click by .5%</div>
+	</div>
+
+	<div class="tooltip">
+		<button id="critMult" onclick="buySomething('critMult')" disabled>Critical Pontuation - lvl. x<br>x points</button>
+		<div class="tooltipText" id="critMultTt">Increases crit multiplier by .1</div>
+	</div>
+
+	<div class="tooltip">
+		<button id="critCrit" onclick="buySomething('critCrit')" disabled>Critical Crits - lvl. x<br>x points</button>
+		<div class="tooltipText" id="critCritTt">Critical crits have a .5% of happening when a crit happens, this increases crit crit multiplier by .5</div>
+	</div>
+	
+	<div class='tooltip'>
+	<button id="percentClick" onclick="buySomething('percentClick')" disabled>Synergy - lvl. 0<br>100 points</button>
+	<div class='tooltipText' id='percentClickTt'>Increases click power by 1% of the points per second</div>
+	</div>
+</div>
+<div id="ordealSection" class="tabcontent select">
+	<div class="paddingLeft">
+		<h1 class="noMargin">The Great Ordeals</h1>
+		<br>The selected ordeals will be applied on the next ascension<br>Completing multiple ordeals at the same time will not grant new rewards besides the ones listed on each ordeal<br>Ordeals will be completed and activated when you ascend<br>When you click abort, all your progress on the run will be deleted and you will do a normal prestige<br>Starter pack and ascension level are 0 while on an ordeal run</div>
+		<div class='paddingLeft' id="ordealCounter"></div>
+		<div id="ordealGrid" class="grid" style="padding:5px;grid-template-columns:repeat(4, minmax(0, 1fr));">
+		<div>
+			<div class="head hasHover" id="ordealTitle_pure" onclick="nextOrdeal('pure')">
+				Pure
+			</div>
+			<div class="cell hoverText">
+				Start with 10 points, every ascension upgrade is disabled<br>
+				Reward: You get 1000x more points from the starter pack
+			</div>
+		</div>
+		<div>
+			<div class="head hasHover" id="ordealTitle_unstable" onclick="nextOrdeal('unstable')">
+				Unstable
+			</div>
+			<div class="cell hoverText">
+				Production and click power are multiplied by a random number between -1 and 2<br>
+				Reward: Production x2
+			</div>
+		</div>
+		<div>
+			<div class="head hasHover" id="ordealTitle_plain" onclick="nextOrdeal('plain')">
+				Plain
+			</div>
+			<div class="cell hoverText">
+				Upgrades don't boost themselves<br>
+				Reward: Combo pack will be at lv. 1 when transcension is done and the amount multiplier is 10% stronger
+			</div>
+		</div>
+		<div>
+			<div class="head hasHover" id="ordealTitle_noclick" onclick="nextOrdeal('noclick')">
+				Forced Vacation
+			</div>
+			<div class="cell hoverText">
+				Click power is 0<br>
+				Reward: Idle production boosts itself by log_10
+			</div>
+		</div>
+		<div>
+			<div class="head hasHover" id="ordealTitle_noidle" onclick="nextOrdeal('noidle')">
+				Work 24/7
+			</div>
+			<div class="cell hoverText">
+				Idle production is 0<br>
+				Reward: Click production boosts itself by log_10
+			</div>
+		</div>
+		<div>
+			<div class="head hasHover" id="ordealTitle_anarchy" onclick="nextOrdeal('anarchy')">
+				Anarchy
+			</div>
+			<div class="cell hoverText">
+				Idle and click king upgrades are disabled<br>
+				Reward: The chosen one will be at lv. 1 when transcension is done
+			</div>
+		</div>
+		<div>
+			<div class="head hasHover" id="ordealTitle_decay" onclick="nextOrdeal('decay')">
+				Decaying World
+			</div>
+			<div class="cell hoverText">
+				Production gets weaker the slower you click, clicking gets weaker the faster you click, both capped at 0<br>
+				Reward: Idle king charges faster and click king required speed falls by 50%
+			</div>
+		</div>
+		<!--
+		<div>
+			<div class="head hasHover" id="ordealTitle_" onclick="nextOrdeal('')">
+
+			</div>
+			<div class="cell hoverText">
+
+			</div>
+		</div>
+	-->
+	</div>
+	<button class="long large" onclick="this.parentElement.style.display='none'" style="background-color:#303;color:#fff;	border-color:#202;">Close</button>
+	<button class="long large" onclick="idleData.pointsThisAscension = 0; prestige()" style="background-color:#303;color:#fff;border-color:#202;">Abort Run</button>
 </div>
 <div class="tab floatRight" id="idleUpgradeSections">
 <button class="large" onclick="openTab('basicSection',false)">Upgrades</button>
+<button id="ordealTab" class="large" onclick="openTab('ordealSection',false)">Ordeals</button>
 <button id='intoLaiPlayground' class="large" onclick="openTab('laiPlayground',false)">Dark dimension</button>
 <button class="large" onclick="openTab('idleTab',false)">Stats</button>
 <button id="ascensionButton" onclick="prestige()" style="display:none">Ascend</button>
@@ -258,6 +420,7 @@
 <p id="pointCounter", class="large animated">You have 0 points</p> <br><br>
 <p id="ppsCounter" class="animated"></p><br>
 <p id="clickPower" class="animated">You have 1 click power</p><br><br>
+<p id="critIndicator" class="animated" style="display:none">CRIT</p><br>
 <button id='theButton' onclick="clickPoints()", class="large animated">Get Points!</button> <br><br>
 <p id="highscoreDisplay", class="floatLeft noMargin animated">You don't have a highscore :c</p><br>
 <p id="trueHighScore", class="floatLeft noMargin animated"></p>
@@ -282,6 +445,7 @@ selfDestruct(document.getElementById('companionBox'))
 if(idleData.omega){
 	document.getElementById('leaveAscension').style.background = '#c90'
 }
+elem("buyMaxButton").addEventListener("contextmenu", (e) => {e.preventDefault()})
 
 </script>
 
